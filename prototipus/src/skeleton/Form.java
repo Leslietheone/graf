@@ -1,6 +1,11 @@
 package skeleton;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,11 +13,163 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
 
-public class Form {
+import javax.swing.*;
+
+public class Form extends JFrame {
 	public Timer timer;
 	public ArrayList<View> views;
-
 	
+	public static final int ROWS = 11;
+	public static final int COLS = 11;
+	public static final int CELL_SIZE = 60;
+	public static final int CANVAS_WIDTH = CELL_SIZE * COLS;
+	public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
+
+	 
+	// itt lehet majd megadni az elemeket amik szerepelnem a megjelenítésben, nem int[][] hanem view[][] lesz
+	//itt lehet majd a view-kon végigiterálni és meghívni az "újrarajzol függvényt"
+	private int[][] board =
+	      {	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+	    	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+	    	  {0,0, 1, 5, 1, 2, 1, 5, 1, 0,0},
+	    	  {0,0, 1, 0, 0, 1, 0, 0, 3, 4,0},
+	    	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
+	    	  {0,0, 2, 1, 1, 1, 1, 1, 2, 0,0},
+	    	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
+	    	  {1,1, 2, 0, 0, 1, 0, 0, 5, 0,0},
+	    	  {0,0, 1, 3, 1, 2, 1, 5, 1, 0,0},
+	    	  {0,0, 0, 4, 0, 0, 0, 0, 0, 0,0},
+	    	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0}};
+	   //1: sín
+	   //2: váltó
+	   //3: állomás
+	   //4: állomáshoz "váró"
+	   //5: alagút, többre is mûködik
+	   
+	   /** ez a konstruktor hozzá, a változásokat majd a függvény végzi */
+	   public Form() {
+		  trains=new ArrayList<Train>();
+		  fields=new ArrayList<Field>();
+		  views=new ArrayList<View>();
+		   
+		   
+		  Container cp = getContentPane();
+	      cp.setLayout(new GridLayout(ROWS, COLS));
+	 
+	      ArrayList<JButton> buttons=new ArrayList();
+	     
+	      for (int row = 0; row < ROWS; ++row) {
+	         for (int col = 0; col < COLS; ++col) {
+	        
+	            JTextField f=new JTextField();
+	            int number = board[row][col];
+	            //itt majd nem számok lesznek hanem típusok
+	            switch(number){
+	            case 0:
+	            	f.setBackground(Color.green);
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	break;
+	            case 1:
+	            	f.setBackground(new Color(139,69,19));
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	break;
+	            case 2:
+	            	JButton button=new JButton("1");
+	            	button.setForeground(Color.yellow);
+	            	button.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {
+	            		    if(button.getText().equals("2"))button.setText("1");
+	            		    else button.setText("2");
+	            		  }
+	            	});
+	            	button.setBackground(new Color(205,133,63));
+	            	cp.add(button);
+	            	break;
+	            
+	            case 3:
+	            	f.setBackground(new Color(139,69,19));
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	//stationview van itt hozzáadva
+	            	break;
+	            case 4:            	
+	            	JButton station=new JButton();
+	            	station.setForeground(Color.white);
+	            	station.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {
+	            		    // meghívja az állomás setPass() függvényét
+	            			 
+	            			 if(station.getText().equals("P")) station.setText("");
+	            			 else station.setText("P");
+	            		    
+	            		  }
+	            	});
+	            	for (int i=row-1;i<row+2;i++)
+	            		for (int j=col-1;j<col+2;j++)
+	            			//nem 3-asra vizsgálunk hanem station típusra
+	            			if (board[i][j]==3){
+	            				//lekéri a Stationview színét, az indexeket a board-ból kapja
+	            				station.setBackground(Color.red);
+	            			}
+	            	cp.add(station);		
+	            	break;
+	            
+	            case 5:
+	            	JButton tunnel=new JButton();
+	            	
+	            	tunnel.setForeground(Color.black);
+	            	tunnel.setBackground(new Color(245,222,179));
+	            	tunnel.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {
+	            			  //bele kell még venni az enum állítgatást, meg az alagútkötögetést de vizuálisan mûködik
+	            			  if (tunnel.getText().equals("Built")){
+	             				int index=buttons.indexOf(tunnel);
+	             				if(index%2==1){
+	             					buttons.get(index).setText("");
+	             					buttons.get(index-1).setText("");
+	             					buttons.remove(index-1);
+	             					buttons.remove(index-1);
+	             				}else {
+	             					buttons.get(index).setText("");
+	             					buttons.get(index+1).setText("");
+	             					buttons.remove(index);
+	             					buttons.remove(index);
+	             				}
+	             				return;
+	            			  }
+	            			  
+	            			  buttons.add(tunnel);
+	            			  
+	            			  if (buttons.size()%2==0){
+	            		    	for (JButton b : buttons) {
+	            		    	    b.setText("Built");
+	            		    	}            		      
+	            		    }         			    
+	            		  }
+	            	});
+	            	f.setEditable(false);
+	            	cp.add(tunnel);
+	            	break;
+	            }
+
+	         }
+	      }
+	      
+	      cp.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+	      
+	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      pack();
+	      setTitle("közvilágítáSCH");
+	      setVisible(true);      
+	   }
 	static int ind; //az aktuálisan kiírni kívánt szöveg behúzásának mértékét adja meg
 	static boolean log=true;
 	/**
@@ -32,11 +189,11 @@ public class Form {
 	/**
 	 * Konstruktor
 	 * @return nothing*/
-	public Form() {
-		trains=new ArrayList<Train>();
-		fields=new ArrayList<Field>();
-		views=new ArrayList<View>();
-	}
+	//public Form() {
+		///trains=new ArrayList<Train>();
+		//fields=new ArrayList<Field>();
+		//views=new ArrayList<View>();
+	//}
 	
 	/**
 	 * A program fõmenüje

@@ -13,8 +13,16 @@ public class Main {
 	   * @return Nothing.
 	   */
 	public static void main(String[] args) throws IOException {
-	
-		Form s=new Form();
-		s.menu();		//Ez a metódus végzi a skeleton lehetõségeinek irányítását, és figyeli a felhasználó parancsait
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	         @Override
+	         public void run() {
+	            Form s=new Form();
+	         }
+	      });
+		//itt nem így kell majd indítani hanem a grafikus felület fogja valahogy hívni a menut...
+		//bár belegondolva nem is lesz menu() hívás hiszen a felületen lesz a menü...
+		
+		//Form s=new Form();
+		//s.menu();		//Ez a metódus végzi a skeleton lehetõségeinek irányítását, és figyeli a felhasználó parancsait
 	}
 }
