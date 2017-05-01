@@ -1,0 +1,16 @@
+package skeleton;
+
+import java.util.ArrayList;
+import java.util.Timer;
+
+public class Form {
+	public Timer timer;
+	public ArrayList<View> views;
+	
+	public void Form(){
+		
+	}
+	public void rePaint(){
+		
+	}
+}

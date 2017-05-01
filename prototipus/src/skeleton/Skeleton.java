@@ -22,10 +22,10 @@ public class Skeleton {
 	 * @param s üzenet
 	 * @return nothing*/
 	public static void logging(String s) {	
-		if (log){
+		/*if (log){
 			for(int i=0;i<ind;i++) System.out.print("   ");
 			System.out.print(s+"\n");
-		}
+		}*/
 	}
 	
 	

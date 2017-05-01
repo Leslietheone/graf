@@ -71,7 +71,7 @@ public class Station extends Rail{
 		if(te.getPass()){
 			Color c=te.getNowColor();
 			if(c.getRGB()==clr.getRGB()){
-				Skeleton.setTColor(te.id, 0,0,0, false);
+				Form.setTColor(te.id, 0,0,0, false);
 			}
 		}
 		if(hasPassenger && clr.getRGB()==te.getBeforeColor().getRGB()) { //van utas és a kocsi üres, tehát felszállhatnak

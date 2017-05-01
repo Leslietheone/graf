@@ -1,0 +1,5 @@
+package skeleton;
+
+public class RailView extends View {
+	public Rail r;
+}

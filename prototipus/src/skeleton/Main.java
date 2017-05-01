@@ -14,7 +14,7 @@ public class Main {
 	   */
 	public static void main(String[] args) throws IOException {
 	
-		Skeleton s=new Skeleton();
+		Form s=new Form();
 		s.menu();		//Ez a metódus végzi a skeleton lehetõségeinek irányítását, és figyeli a felhasználó parancsait
 	}
 }

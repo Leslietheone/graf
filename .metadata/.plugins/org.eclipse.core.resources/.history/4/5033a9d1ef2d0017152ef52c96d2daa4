@@ -1,0 +1,15 @@
+package skeleton;
+
+import java.awt.Color;
+
+public View {
+	public Color c;
+	public int x, y;
+	public Color cBefore;
+	
+	public Color getColor();
+	public void setColor(Color c);
+	public void Draw();
+	public Color getCBefore();
+	public void setCBefore();
+}

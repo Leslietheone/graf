@@ -1,0 +1,5 @@
+package skeleton;
+
+public class StationView extends View {
+	public Station s;
+}
