@@ -8,4 +8,7 @@ public class TunnelView extends View{
 	public Object getA(){
 		return t;
 	}
+	public int getID(){
+		return t.id;
+	}
 }

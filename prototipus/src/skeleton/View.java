@@ -25,4 +25,7 @@ public class View {
 	public Object getA(){
 		return null;
 	}
+	public int getID(){
+		return -1;
+	}
 }

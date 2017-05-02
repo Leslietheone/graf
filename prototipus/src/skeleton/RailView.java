@@ -8,4 +8,7 @@ public class RailView extends View {
 	public Object getA(){
 		return r;
 	}
+	public int getID(){
+		return r.id;
+	}
 }

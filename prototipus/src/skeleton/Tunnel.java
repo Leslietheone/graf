@@ -147,7 +147,7 @@ public class Tunnel extends Rail {
 		Skeleton.ind++;
 		Skeleton.logging("Tunnel: setBuilt()");
 		
-		built=true;
+		built=!built;
 		Skeleton.ind--;
 	}
 	

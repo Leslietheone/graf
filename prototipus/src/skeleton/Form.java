@@ -17,10 +17,12 @@ import javax.swing.*;
 
 public class Form extends JFrame {
 	public Timer timer;
-	public ArrayList<View> views;
+	public View[][] views;
 	
-	public static final int ROWS = 11;
-	public static final int COLS = 11;
+	/*public static final int ROWS = 11;
+	public static final int COLS = 11;*/
+	public static final int ROWS = 4;
+	public static final int COLS = 4;
 	public static final int CELL_SIZE = 60;
 	public static final int CANVAS_WIDTH = CELL_SIZE * COLS;
 	public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
@@ -50,10 +52,194 @@ public class Form extends JFrame {
 	   public Form() {
 		  trains=new ArrayList<Train>();
 		  fields=new ArrayList<Field>();
-		  views=new ArrayList<View>();
-		   
-		   
+		  views=new View[4][4];
+		  
+		  System.out.println("Ird be a palya szamat!");
+		  Scanner sc=new Scanner(System.in);
+		  String s=sc.next();
+		  ArrayList<ArrayList<ArrayList<String>>> db = readFile("test.txt");
+		  loadMap(Integer.parseInt(s), db);
+		  
 		  Container cp = getContentPane();
+	      cp.setLayout(new GridLayout(ROWS, COLS));
+	 
+	      ArrayList<JButton> buttons=new ArrayList();
+	     
+	      for (int row = 0; row < ROWS; ++row) {
+	         for (int col = 0; col < COLS; ++col) {
+	        
+	        	 if(views[row][col]==null)views[row][col]=new FieldView();
+	        	 
+	            JTextField f=new JTextField();
+	            String type = views[row][col].getA().getClass().getName();
+
+	            switch(type){
+	            case "skeleton.Field":
+	            	f.setBackground(Color.green);
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	break;
+	            case "skeleton.CrossRail":
+	            	f.setBackground(Color.white);
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	break;
+	            case "skeleton.Rail":
+	            	f.setBackground(new Color(139,69,19));
+	            	f.setEditable(false);
+	            	cp.add(f);
+	            	break;
+	            case "skeleton.Switch":
+	            	JButton button=new JButton();
+	            	button.setForeground(Color.yellow);
+	            	if(((Switch)views[row][col].getA()).dir){
+	            		button.setText("1");
+	            	} else {
+	            		button.setText("2");
+	            	}
+	            	button.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {	
+	            			  int x=button.getX()/60;
+	            			  int y=button.getY()/60;
+	            			  
+	            			  //Változás elõtt
+	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
+	            			  
+	            			  if(button.getText().equals("1")){
+	            				  button.setText("2");
+	            				  ((Switch)views[y][x].getA()).dir=false;
+	            			  } else {
+	            				  button.setText("1");
+	            				  ((Switch)views[y][x].getA()).dir=true;
+	            			  }
+	            			  
+	            			  //Változás után
+	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
+	            			  
+	            		  }
+	            	});
+	            	button.setBackground(new Color(205,133,63));
+	            	cp.add(button);
+	            	break;
+	            
+	            case "skeleton.Station":            	
+	            	JButton station=new JButton();
+	            	station.setForeground(Color.white);
+	            	if(((Station)views[row][col].getA()).hasPassenger){
+	            		station.setText("P");
+	            	} else {
+	            		station.setText("");
+	            	}
+	            	
+	            	station.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {
+	            		    // meghívja az állomás setPass() függvényét
+	            			  
+	            			  
+	            			  int x=station.getX()/60;
+	            			  int y=station.getY()/60;
+	            			 
+	            			  //Változás elõtt
+	            			  //System.out.println(((Station)views[y][x].getA()).hasPassenger);
+	            			  
+	            			 if(station.getText().equals("P")){
+	            				 station.setText("");
+	            				 ((Station)views[y][x].getA()).hasPassenger=false;
+	            			 }
+	            			 else {
+	            				 station.setText("P");
+	            				 ((Station)views[y][x].getA()).hasPassenger=true;
+	            			 }
+	            			 
+	            			 //Változás után
+	            			 //System.out.println(((Station)views[y][x].getA()).hasPassenger);
+	            		    
+	            		  }
+	            	});
+	            	
+	            	//Az egyszerûség kedvvért nem csináltam külön épületet
+	            	station.setBackground(views[row][col].getColor());
+	            	
+	            	
+	            	
+	            	cp.add(station);		
+	            	break;
+	            
+	            case "skeleton.Tunnel":
+	            	JButton tunnel=new JButton();
+	            	
+	            	tunnel.setForeground(Color.black);
+	            	tunnel.setBackground(new Color(245,222,179));
+	            	tunnel.addActionListener(new ActionListener()
+	            	{
+	            		  public void actionPerformed(ActionEvent e)
+	            		  {
+	            			  //bele kell még venni az enum állítgatást, meg az alagútkötögetést de vizuálisan mûködik
+	            			  if (tunnel.getText().equals("Built")){
+	             				int index=buttons.indexOf(tunnel);
+	             				int x1=buttons.get(index).getX()/60;
+            		    	    int y1=buttons.get(index).getY()/60;
+            		    	    //Elõtte
+	             				//System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
+            		    	    ((Tunnel)views[y1][x1].getA()).setBuilt();
+	             				if(index%2==1){
+	             					int x2=buttons.get(index-1).getX()/60;
+	            		    	    int y2=buttons.get(index-1).getY()/60;
+	            		    	    ((Tunnel)views[y2][x2].getA()).setBuilt();
+	             					buttons.get(index).setText("");
+	             					buttons.get(index-1).setText("");
+	             					buttons.remove(index-1);
+	             					buttons.remove(index-1);
+	             				}else {
+	             					int x2=buttons.get(index+1).getX()/60;
+	            		    	    int y2=buttons.get(index+1).getY()/60;
+	            		    	    ((Tunnel)views[y2][x2].getA()).setBuilt();
+	             					buttons.get(index).setText("");
+	             					buttons.get(index+1).setText("");
+	             					buttons.remove(index);
+	             					buttons.remove(index);
+	             				}
+	             				//Utána
+	             				//System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
+	             				return;
+	            			  }
+	            			  
+	            			  if(!(buttons.contains(tunnel))){
+	            				  buttons.add(tunnel);
+	            			  }
+	            			  
+	            			  
+	            			  if ((buttons.size()%2==0)&&buttons.size()!=0){
+	            				  	int x1=buttons.get(buttons.size()-1).getX()/60;
+	            		    	    int y1=buttons.get(buttons.size()-1).getY()/60;
+	            		    	    int x2=buttons.get(buttons.size()-2).getX()/60;
+	            		    	    int y2=buttons.get(buttons.size()-2).getY()/60;
+	            		    	    //Építés elõtt
+	            		    	    //System.out.println(((Tunnel)views[y2][x2].getA()).tostr());
+	            		    	    //System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
+	            		    	    ((Tunnel)views[y2][x2].getA()).buildTunnel(((Tunnel)views[y1][x1].getA()));
+	            		    	    buttons.get(buttons.size()-1).setText("Built");
+	            		    	    buttons.get(buttons.size()-2).setText("Built");
+	            		    	    //Építés után
+	            		    	    //System.out.println(((Tunnel)views[y2][x2].getA()).tostr());
+	            		    	    //System.out.println(((Tunnel)views[y1][x1].getA()).tostr());    		      
+	            		    }         			    
+	            		  }
+	            	});
+	            	f.setEditable(false);
+	            	cp.add(tunnel);
+	            	break;
+	            }
+
+	         }
+	      }
+		  
+		   
+		  /*Container cp = getContentPane();
 	      cp.setLayout(new GridLayout(ROWS, COLS));
 	 
 	      ArrayList<JButton> buttons=new ArrayList();
@@ -161,7 +347,7 @@ public class Form extends JFrame {
 	            }
 
 	         }
-	      }
+	      }*/
 	      
 	      cp.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 	      
@@ -291,7 +477,7 @@ public class Form extends JFrame {
 					for(int j=0;j<fields.size();j++) if(!(cField.get(2).matches("null")) && fields.get(j).id==Integer.parseInt(cField.get(2))) r2=(Rail) fields.get(j);
 					Rail r=new Rail(r1,r2,Integer.parseInt(cField.get(3)));
 					fields.add(r);
-					views.add(new RailView((Rail)fields.get(fields.size()-1)));
+					views[Integer.parseInt(cField.get(4))][Integer.parseInt(cField.get(5))]=new RailView((Rail)fields.get(fields.size()-1));
 					break;
 				case "Switch": 
 					r1=null;
@@ -302,7 +488,7 @@ public class Form extends JFrame {
 					for(int j=0;j<fields.size();j++) if(!(cField.get(3).matches("null")) && fields.get(j).id==Integer.parseInt(cField.get(3))) r3=(Rail) fields.get(j);
 					Switch sw=new Switch(r1, r2, r3, Integer.parseInt(cField.get(4)));
 					fields.add(sw);
-					views.add(new SwitchView((Switch)fields.get(fields.size()-1)));
+					views[Integer.parseInt(cField.get(5))][Integer.parseInt(cField.get(6))]=new SwitchView((Switch)fields.get(fields.size()-1));
 					break;
 				case "Station":
 					r1=null;
@@ -314,7 +500,7 @@ public class Form extends JFrame {
 					else b=true;
 					Station st=new Station(new Color(Integer.parseInt(cField.get(1)),Integer.parseInt(cField.get(2)), Integer.parseInt(cField.get(3))), r1, r2, b, Integer.parseInt(cField.get(7)));
 					fields.add(st);
-					views.add(new StationView((Station)fields.get(fields.size()-1)));
+					views[Integer.parseInt(cField.get(8))][Integer.parseInt(cField.get(9))]=new StationView((Station)fields.get(fields.size()-1));
 					break;
 				case "Tunnel": 
 					r1=null;
@@ -325,7 +511,7 @@ public class Form extends JFrame {
 					for(int j=0;j<fields.size();j++) if(!(cField.get(3).matches("null")) && fields.get(j).id==Integer.parseInt(cField.get(3))) r3=(Rail) fields.get(j);
 					Tunnel tu=new Tunnel(r1,r2,r3, Integer.parseInt(cField.get(4)));
 					fields.add(tu);
-					views.add(new TunnelView((Tunnel)fields.get(fields.size()-1)));
+					views[Integer.parseInt(cField.get(5))][Integer.parseInt(cField.get(6))]=new TunnelView((Tunnel)fields.get(fields.size()-1));
 					break;
 				case "CrossRail": 
 					r1=null;
@@ -338,7 +524,7 @@ public class Form extends JFrame {
 					for(int j=0;j<fields.size();j++) if(!(cField.get(4).matches("null")) && fields.get(j).id==Integer.parseInt(cField.get(4))) r4=(Rail) fields.get(j);
 					CrossRail cr=new CrossRail(r1,r2,r3,r4, Integer.parseInt(cField.get(5)));
 					fields.add(cr);
-					views.add(new CrossRailView((CrossRail)fields.get(fields.size()-1)));
+					views[Integer.parseInt(cField.get(6))][Integer.parseInt(cField.get(7))]=new CrossRailView((CrossRail)fields.get(fields.size()-1));
 					break;
 			}
 		}
@@ -442,7 +628,6 @@ public class Form extends JFrame {
 					te.setrPrev(trains.get(i).rPrev);
 					trains.get(i).t.add(te);
 					trains.get(i).r.setOccupied(true);
-					views.add(new TrainElementView(trains.get(i).t.get(trains.get(i).t.size()-1)));
 				}
 				else {
 					r=trains.get(i).t.get(trains.get(i).t.size()-1).rPrev;
@@ -455,7 +640,6 @@ public class Form extends JFrame {
 					}
 					trains.get(i).t.add(te);
 					r.setOccupied(true);
-					views.add(new TrainElementView(trains.get(i).t.get(trains.get(i).t.size()-1)));
 				}
 				break;
 			}
@@ -472,16 +656,8 @@ public class Form extends JFrame {
 			if(fields.get(i).id==Sid)  {
 				Switch s=(Switch)fields.get(i);
 				s.setDir();
-				for(int j=0;j<views.size();j++){
-					if(views.get(j).getA().getClass().getName()=="skeleton.Switch")  {
-						if(((Switch)views.get(j).getA()).id==Sid)  {
-							views.remove(j);
-						}
-					}
-				}
 				fields.remove(i);
 				fields.add(s);
-				views.add(new SwitchView((Switch)fields.get(fields.size()-1)));
 			}
 		}
 	}
@@ -496,13 +672,6 @@ public class Form extends JFrame {
 		for(int i=0;i<fields.size();i++) {
 			if(fields.get(i).id==BEGINid) {
 				begin=(Tunnel) fields.get(i);
-				for(int j=0;j<views.size();j++){
-					if(views.get(j).getA().getClass().getName()=="skeleton.Tunnel")  {
-						if(((Tunnel)views.get(j).getA()).id==BEGINid)  {
-							views.remove(j);
-						}
-					}
-				}
 				fields.remove(i);
 				break;
 			}
@@ -511,18 +680,9 @@ public class Form extends JFrame {
 			if(fields.get(i).id==ENDid) {
 				Tunnel end=(Tunnel) fields.get(i);
 				end.buildTunnel(begin);
-				for(int j=0;j<views.size();j++){
-					if(views.get(j).getA().getClass().getName()=="skeleton.Tunnel")  {
-						if(((Tunnel)views.get(j).getA()).id==ENDid)  {
-							views.remove(j);
-						}
-					}
-				}
 				fields.remove(i);
 				fields.add(end);
-				views.add(new TunnelView((Tunnel)fields.get(fields.size()-1)));
 				fields.add(begin);
-				views.add(new TunnelView((Tunnel)fields.get(fields.size()-1)));
 				break;
 			}
 		}
@@ -541,16 +701,8 @@ public class Form extends JFrame {
 			if(fields.get(i).id==Sid)  {
 				Station s=(Station) fields.get(i);
 				s.setPassanger(p);
-				for(int j=0;j<views.size();j++){
-					if(views.get(j).getA().getClass().getName()=="skeleton.Station")  {
-						if(((Station)views.get(j).getA()).id==Sid)  {
-							views.remove(j);
-						}
-					}
-				}
 				fields.remove(i);
 				fields.add(s);
-				views.add(new StationView((Station)fields.get(fields.size()-1)));
 			}
 		}
 	}

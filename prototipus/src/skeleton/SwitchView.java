@@ -8,4 +8,7 @@ public class SwitchView extends View{
 	public Object getA(){
 		return sw;
 	}
+	public int getID(){
+		return sw.id;
+	}
 }

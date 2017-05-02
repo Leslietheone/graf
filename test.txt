@@ -1,0 +1,193 @@
+begin 0
+Rail;null;null;0;1;1
+Rail;0;null;1;1;2
+Rail;1;null;2;2;2
+Rail;2;null;3;3;2
+end
+begin 1
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Station;50;50;50;1;null;false;2;1;1
+Rail;2;null;3;2;1
+Rail;3;null;4;2;2
+end
+begin 2
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Rail;null;null;2;2;1
+Rail;2;null;3;3;1
+Tunnel;1;2;null;4;1;1
+end
+begin 3
+Rail;null;null;0;0;1
+Rail;null;null;1;2;1
+Rail;null;null;2;1;0
+Rail;null;null;3;1;2
+CrossRail;0;1;2;3;4;1;1
+end
+begin 4
+Rail;null;null;0;0;0
+Rail;null;null;1;0;2
+Rail;null;null;2;1;1
+Switch;0;1;2;3;0;1
+end
+begin 5
+Rail;null;null;0;1;1
+Rail;0;null;1;1;2
+Rail;1;null;2;2;2
+Rail;2;null;3;3;2
+end
+begin 6
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Station;50;50;50;1;null;false;2;1;1
+Rail;2;null;3;2;1
+Rail;3;null;4;2;2
+end
+begin 7
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Station;50;50;50;1;null;false;2;1;1
+Rail;2;null;3;2;1
+Rail;3;null;4;2;2
+end
+begin 8
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Station;50;50;50;1;null;false;2;1;1
+Rail;2;null;3;2;1
+Rail;3;null;4;2;2
+end
+begin 9
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Station;50;50;50;1;null;false;2;1;1
+Station;50;50;50;2;null;false;3;2;1
+Rail;3;null;4;3;1
+Rail;4;null;5;3;2
+end
+begin 10
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Tunnel;1;null;null;2;1;1
+Rail;2;null;3;2;1
+Rail;3;null;4;3;1
+end
+begin 11
+Rail;null;null;0;0;0
+Rail;null;null;2;2;0
+Tunnel;0;2;null;1;1;0
+Tunnel;null;null;null;3;1;2
+end
+begin 12
+Rail;null;null;0;0;0
+Rail;null;null;3;2;2
+Rail;3;null;4;0;2
+Rail;null;null;5;2;0
+Tunnel;0;5;null;1;1;0
+Tunnel;4;3;null;2;1;2
+end
+begin 13
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Rail;null;null;3;0;3
+Rail;null;null;4;1;2
+Switch;1;3;4;2;0;2
+end
+begin 14
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Rail;null;null;3;0;3
+Rail;null;null;4;1;2
+Switch;1;3;4;2;0;2
+end
+begin 15
+Rail;null;null;0;0;0
+Rail;null;null;2;1;1
+Rail;2;null;3;2;1
+Rail;null;null;4;0;2
+Rail;4;null;5;0;3
+Switch;0;4;2;1;0;1
+end
+begin 16
+Rail;null;null;0;0;1
+Rail;0;null;1;1;1
+Rail;null;null;2;2;0
+Rail;null;null;3;3;1
+Rail;null;null;4;2;2
+CrossRail;1;3;2;4;5;2;1
+end
+begin 17
+Rail;null;null;0;1;0
+Rail;null;null;1;0;2
+Rail;0;null;2;1;1
+Rail;null;null;3;2;2
+Rail;null;null;4;1;3
+CrossRail;1;3;2;4;5;1;2
+end
+begin 18
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Rail;1;null;2;0;2
+Rail;2;null;3;0;3
+end
+begin 19
+Rail;null;null;0;0;0
+Rail;null;null;2;2;0
+Rail;null;null;3;0;2
+Rail;null;null;5;2;2
+Tunnel;0;2;null;1;1;0
+Tunnel;3;5;null;4;1;2
+end
+begin 20
+Rail;null;null;0;0;0
+Rail;0;null;1;0;1
+Rail;1;null;2;0;2
+Rail;2;null;3;0;3
+Rail;3;null;4;1;3
+Rail;4;null;5;2;3
+end
+begin 21
+Rail;null;null;0;1;0
+Rail;0;null;1;0;0
+Rail;1;null;2;0;1
+Rail;null;null;4;1;2
+Rail;4;null;5;2;2
+Rail;5;null;6;3;2
+Rail;null;null;7;0;3
+Switch;2;4;7;3;0;2
+end
+begin 22
+Rail;null;null;0;0;1
+Rail;0;null;1;0;0
+Rail;null;null;3;2;0
+Rail;3;null;4;3;0
+Rail;4;null;5;3;1
+Rail;null;null;6;0;3
+Rail;null;null;8;2;3
+Tunnel;1;3;null;2;1;0
+Tunnel;6;8;null;7;1;3
+end
+begin 23
+Rail;null;null;0;0;3
+Rail;0;null;1;0;2
+Rail;1;null;2;1;2
+Rail;null;null;3;1;0
+Rail;3;null;4;2;0
+Rail;4;null;5;2;1
+Rail;null;null;6;3;2
+Rail;null;null;7;2;3
+CrossRail;2;6;5;7;8;2;2
+end
+begin 24
+Rail;null;null;0;1;1
+Rail;null;null;1;0;2
+Rail;null;null;2;1;3
+Rail;null;null;3;2;2
+CrossRail;1;3;0;2;4;1;2
+Rail;3;null;5;3;2
+Rail;5;null;6;3;1
+Rail;6;null;7;3;0
+Rail;7;null;8;2;0
+Rail;8;0;9;1;0
+end

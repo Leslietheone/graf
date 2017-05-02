@@ -8,4 +8,7 @@ public class CrossRailView extends View{
 	public Object getA(){
 		return cr;
 	}
+	public int getID(){
+		return cr.id;
+	}
 }

@@ -8,4 +8,7 @@ public class TrainElementView extends View {
 	public Object getA(){
 		return te;
 	}
+	public int getID(){
+		return te.id;
+	}
 }
