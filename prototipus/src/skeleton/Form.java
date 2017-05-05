@@ -21,8 +21,8 @@ public class Form extends JFrame {
 	
 	/*public static final int ROWS = 11;
 	public static final int COLS = 11;*/
-	public static final int ROWS = 4;
-	public static final int COLS = 4;
+	public static final int ROWS = 11;
+	public static final int COLS = 11;
 	public static final int CELL_SIZE = 60;
 	public static final int CANVAS_WIDTH = CELL_SIZE * COLS;
 	public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
@@ -52,7 +52,7 @@ public class Form extends JFrame {
 	   public Form() {
 		  trains=new ArrayList<Train>();
 		  fields=new ArrayList<Field>();
-		  views=new View[4][4];
+		  views=new View[ROWS][COLS];
 		  
 		  System.out.println("Ird be a palya szamat!");
 		  Scanner sc=new Scanner(System.in);
