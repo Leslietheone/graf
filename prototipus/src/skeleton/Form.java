@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
+import javax.swing.Timer;
 
 import javax.swing.*;
 
@@ -19,14 +19,13 @@ public class Form extends JFrame {
 	public Timer timer;
 	public View[][] views;
 	
-	/*public static final int ROWS = 11;
-	public static final int COLS = 11;*/
 	public static final int ROWS = 11;
 	public static final int COLS = 11;
 	public static final int CELL_SIZE = 60;
 	public static final int CANVAS_WIDTH = CELL_SIZE * COLS;
 	public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
-
+	public ArrayList<JButton> buttons;
+	public Container cp;
 	 
 	// itt lehet majd megadni az elemeket amik szerepelnem a megjelenítésben, nem int[][] hanem view[][] lesz
 	//itt lehet majd a view-kon végigiterálni és meghívni az "újrarajzol függvényt"
@@ -60,10 +59,10 @@ public class Form extends JFrame {
 		  ArrayList<ArrayList<ArrayList<String>>> db = readFile("test.txt");
 		  loadMap(Integer.parseInt(s), db);
 		  
-		  Container cp = getContentPane();
+		  cp = getContentPane();
 	      cp.setLayout(new GridLayout(ROWS, COLS));
 	 
-	      ArrayList<JButton> buttons=new ArrayList();
+	      buttons=new ArrayList<JButton>();
 	     
 	      for (int row = 0; row < ROWS; ++row) {
 	         for (int col = 0; col < COLS; ++col) {
@@ -90,7 +89,7 @@ public class Form extends JFrame {
 	            	cp.add(f);
 	            	break;
 	            case "skeleton.Switch":
-	            	JButton button=new JButton();
+	            	final JButton button=new JButton();
 	            	button.setForeground(Color.yellow);
 	            	if(((Switch)views[row][col].getA()).dir){
 	            		button.setText("1");
@@ -125,7 +124,7 @@ public class Form extends JFrame {
 	            	break;
 	            
 	            case "skeleton.Station":            	
-	            	JButton station=new JButton();
+	            	final JButton station=new JButton();
 	            	station.setForeground(Color.white);
 	            	if(((Station)views[row][col].getA()).hasPassenger){
 	            		station.setText("P");
@@ -170,7 +169,7 @@ public class Form extends JFrame {
 	            	break;
 	            
 	            case "skeleton.Tunnel":
-	            	JButton tunnel=new JButton();
+	            	final JButton tunnel=new JButton();
 	            	
 	            	tunnel.setForeground(Color.black);
 	            	tunnel.setBackground(new Color(245,222,179));
@@ -238,124 +237,44 @@ public class Form extends JFrame {
 	         }
 	      }
 		  
-		   
-		  /*Container cp = getContentPane();
-	      cp.setLayout(new GridLayout(ROWS, COLS));
-	 
-	      ArrayList<JButton> buttons=new ArrayList();
-	     
-	      for (int row = 0; row < ROWS; ++row) {
-	         for (int col = 0; col < COLS; ++col) {
-	        
-	            JTextField f=new JTextField();
-	            int number = board[row][col];
-	            //itt majd nem számok lesznek hanem típusok
-	            switch(number){
-	            case 0:
-	            	f.setBackground(Color.green);
-	            	f.setEditable(false);
-	            	cp.add(f);
-	            	break;
-	            case 1:
-	            	f.setBackground(new Color(139,69,19));
-	            	f.setEditable(false);
-	            	cp.add(f);
-	            	break;
-	            case 2:
-	            	JButton button=new JButton("1");
-	            	button.setForeground(Color.yellow);
-	            	button.addActionListener(new ActionListener()
-	            	{
-	            		  public void actionPerformed(ActionEvent e)
-	            		  {
-	            		    if(button.getText().equals("2"))button.setText("1");
-	            		    else button.setText("2");
-	            		  }
-	            	});
-	            	button.setBackground(new Color(205,133,63));
-	            	cp.add(button);
-	            	break;
-	            
-	            case 3:
-	            	f.setBackground(new Color(139,69,19));
-	            	f.setEditable(false);
-	            	cp.add(f);
-	            	//stationview van itt hozzáadva
-	            	break;
-	            case 4:            	
-	            	JButton station=new JButton();
-	            	station.setForeground(Color.white);
-	            	station.addActionListener(new ActionListener()
-	            	{
-	            		  public void actionPerformed(ActionEvent e)
-	            		  {
-	            		    // meghívja az állomás setPass() függvényét
-	            			 
-	            			 if(station.getText().equals("P")) station.setText("");
-	            			 else station.setText("P");
-	            		    
-	            		  }
-	            	});
-	            	for (int i=row-1;i<row+2;i++)
-	            		for (int j=col-1;j<col+2;j++)
-	            			//nem 3-asra vizsgálunk hanem station típusra
-	            			if (board[i][j]==3){
-	            				//lekéri a Stationview színét, az indexeket a board-ból kapja
-	            				station.setBackground(Color.red);
-	            			}
-	            	cp.add(station);		
-	            	break;
-	            
-	            case 5:
-	            	JButton tunnel=new JButton();
-	            	
-	            	tunnel.setForeground(Color.black);
-	            	tunnel.setBackground(new Color(245,222,179));
-	            	tunnel.addActionListener(new ActionListener()
-	            	{
-	            		  public void actionPerformed(ActionEvent e)
-	            		  {
-	            			  //bele kell még venni az enum állítgatást, meg az alagútkötögetést de vizuálisan mûködik
-	            			  if (tunnel.getText().equals("Built")){
-	             				int index=buttons.indexOf(tunnel);
-	             				if(index%2==1){
-	             					buttons.get(index).setText("");
-	             					buttons.get(index-1).setText("");
-	             					buttons.remove(index-1);
-	             					buttons.remove(index-1);
-	             				}else {
-	             					buttons.get(index).setText("");
-	             					buttons.get(index+1).setText("");
-	             					buttons.remove(index);
-	             					buttons.remove(index);
-	             				}
-	             				return;
-	            			  }
-	            			  
-	            			  buttons.add(tunnel);
-	            			  
-	            			  if (buttons.size()%2==0){
-	            		    	for (JButton b : buttons) {
-	            		    	    b.setText("Built");
-	            		    	}            		      
-	            		    }         			    
-	            		  }
-	            	});
-	            	f.setEditable(false);
-	            	cp.add(tunnel);
-	            	break;
-	            }
-
-	         }
-	      }*/
+		
 	      
 	      cp.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 	      
 	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	      pack();
 	      setTitle("közvilágítáSCH");
-	      setVisible(true);      
+	      setVisible(true);  
+	      
+	      
+	      for(int i=0;i<ROWS;i++) {
+	    	  for(int j=0;j<COLS;j++) {
+	    		  System.out.print(views[i][j].getID()+" ");
+	    	  }
+	    	  System.out.println("\n");
+	      }
+	      addTrain(1, 2, true);
+	      addElement(1,1);
+	      addElement(1,2);
+	      setTColor(1, 130,70,90,true);
+	      setTColor(1, 10,130,90,true);
+	     
+	      timer=new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				step();
+				listTrain();
+				System.out.println(trains.get(0).t.get(0).r.id);
+				rePaint();
+			}
+	    	  
+	      });
+	      timer.start();
+	   
 	   }
+	
+	
+	   
 	static int ind; //az aktuálisan kiírni kívánt szöveg behúzásának mértékét adja meg
 	static boolean log=true;
 	/**
@@ -828,6 +747,27 @@ public class Form extends JFrame {
 	
 	
 	public void rePaint(){
-		
+		for(int i=0;i<trains.size();i++) {
+			for(int j=0;j<trains.get(i).t.size();j++) {
+				for(int k=0;k<ROWS;k++) {
+					for(int l=0;l<COLS;l++) {
+						if(trains.get(i).t.get(j).r.id==views[k][l].getID()) {
+							
+							cp.getComponent(k*11+l).setBackground(trains.get(i).t.get(j).cNow);
+							int id=trains.get(i).t.get(j).rPrev.id;
+							
+							for(int m=0;m<ROWS;m++) {
+								for(int n=0;n<COLS;n++) {
+									if(views[m][n].getID()==id) {
+										cp.getComponent(m*11+n).setBackground(views[m][n].c);
+										
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -6,6 +6,7 @@ public class StationView extends View {
 		this.s=s;
 		this.setCBefore(s.clr);
 		this.setColor(s.clr);
+		this.c=s.clr;
 	}
 	public Object getA(){
 		return s;

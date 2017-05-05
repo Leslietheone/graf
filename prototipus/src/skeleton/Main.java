@@ -16,7 +16,8 @@ public class Main {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	         @Override
 	         public void run() {
-	            Form s=new Form();
+	        	 Form s=new Form();
+	            
 	         }
 	      });
 		//itt nem így kell majd indítani hanem a grafikus felület fogja valahogy hívni a menut...
