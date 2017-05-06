@@ -53,6 +53,13 @@ public class Form extends JFrame {
 		  fields=new ArrayList<Field>();
 		  views=new View[ROWS][COLS];
 		  
+		  for (int row = 0; row < ROWS; ++row) {
+		         for (int col = 0; col < COLS; ++col) {
+		        
+		        	 if(views[row][col]==null)views[row][col]=new FieldView();
+		         }
+		  }
+		  
 		  System.out.println("Ird be a palya szamat!");
 		  Scanner sc=new Scanner(System.in);
 		  String s=sc.next();
@@ -67,7 +74,7 @@ public class Form extends JFrame {
 	      for (int row = 0; row < ROWS; ++row) {
 	         for (int col = 0; col < COLS; ++col) {
 	        
-	        	 if(views[row][col]==null)views[row][col]=new FieldView();
+	        	 //if(views[row][col]==null)views[row][col]=new FieldView();
 	        	 
 	            JTextField f=new JTextField();
 	            String type = views[row][col].getA().getClass().getName();
@@ -91,12 +98,98 @@ public class Form extends JFrame {
 	            case "skeleton.Switch":
 	            	final JButton button=new JButton();
 	            	button.setForeground(Color.yellow);
-	            	if(((Switch)views[row][col].getA()).dir){
-	            		button.setText("1");
-	            		
-	            	} else {
-	            		button.setText("2");
-	            	}
+	            	
+	            	if((views[row][col-1].getA().getClass().getName()!="skeleton.Field") && (views[row-1][col].getA().getClass().getName()!="skeleton.Field") && (views[row+1][col].getA().getClass().getName()!="skeleton.Field")){
+	            		if (((Switch)views[row][col].getA()).r1==views[row][col-1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row-1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x255D));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2557));
+			            	}
+	            		} else if (((Switch)views[row][col].getA()).r1==views[row-1][col].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row+1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2551));
+			            	} else {
+			            		button.setText(Character.toString((char)0x255D));
+			            	}
+	            		} else {
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col-1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2557));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2551));
+			            	}
+	            		}	
+            		} else if((views[row][col+1].getA().getClass().getName()!="skeleton.Field") && (views[row-1][col].getA().getClass().getName()!="skeleton.Field") && (views[row+1][col].getA().getClass().getName()!="skeleton.Field")){
+	            		if (((Switch)views[row][col].getA()).r1==views[row][col+1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row-1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x255A));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2554));
+			            	}
+	            		} else if (((Switch)views[row][col].getA()).r1==views[row-1][col].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row+1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2551));
+			            	} else {
+			            		button.setText(Character.toString((char)0x255A));
+			            	}
+	            		} else {
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col+1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2554));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2551));
+			            	}
+	            		}	
+            		} else if((views[row][col-1].getA().getClass().getName()!="skeleton.Field") && (views[row][col+1].getA().getClass().getName()!="skeleton.Field") && (views[row+1][col].getA().getClass().getName()!="skeleton.Field")){
+	            		if (((Switch)views[row][col].getA()).r1==views[row][col-1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col+1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2550));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2557));
+			            	}
+	            		} else if (((Switch)views[row][col].getA()).r1==views[row][col+1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row+1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2554));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2550));
+			            	}
+	            		} else {
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col-1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2557));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2554));
+			            	}
+	            		}	
+            		} else {
+            			if (((Switch)views[row][col].getA()).r1==views[row][col-1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col+1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x255D));
+			            	} else {
+			            		button.setText(Character.toString((char)0x2550));
+			            	}
+	            		} else if (((Switch)views[row][col].getA()).r1==views[row][col+1].getA()){
+	            			
+	            			if(((Switch)views[row][col].getA()).r2==views[row-1][col].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x2550));
+			            	} else {
+			            		button.setText(Character.toString((char)0x255A));
+			            	}
+	            		} else {
+	            			if(((Switch)views[row][col].getA()).r2==views[row][col+1].getA() && ((Switch)views[row][col].getA()).dir){
+			            		button.setText(Character.toString((char)0x255A));
+			            	} else {
+			            		button.setText(Character.toString((char)0x255D));
+			            	}
+	            		}
+            		}
+            		
+	            	
 	            	button.addActionListener(new ActionListener()
 	            	{
 	            		  public void actionPerformed(ActionEvent e)
@@ -107,14 +200,106 @@ public class Form extends JFrame {
 	            			  //Változás elõtt
 	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
 	            			  
-	            			  if(button.getText().equals("1")){
+	            			  /*if(button.getText().equals("1")){
 	            				  button.setText("2");
 	            				  ((Switch)views[y][x].getA()).dir=false;
 	            			  } else {
 	            				  button.setText("1");
 	            				  ((Switch)views[y][x].getA()).dir=true;
-	            			  }
+	            			  }*/
 	            			  
+	            			  System.out.println(((Switch)views[y][x].getA()).dir);
+	            			  ((Switch)views[y][x].getA()).setDir();
+	            			  System.out.println(((Switch)views[y][x].getA()).dir);
+	            			  if(views[y][x-1].getA().getClass().getName()!="skeleton.Field" && views[y-1][x].getA().getClass().getName()!="skeleton.Field" && views[y+1][x].getA().getClass().getName()!="skeleton.Field"){
+	      	            		if (((Switch)views[y][x].getA()).r1==views[y][x-1].getA()){
+	      	            			
+	      	            			if(((Switch)views[y][x].getA()).r2==views[y-1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	      			            		button.setText(Character.toString((char)0x255D));
+	      			            	} else {
+	      			            		button.setText(Character.toString((char)0x2557));
+	      			            	}
+	      	            		} else if (((Switch)views[y][x].getA()).r1==views[y-1][x].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y+1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2551));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x255D));
+	    			            	}
+	    	            		} else {
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x-1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2557));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2551));
+	    			            	}
+	    	            		} 
+	                  		} else if((views[y][x+1].getA().getClass().getName()!="skeleton.Field") && (views[y-1][x].getA().getClass().getName()!="skeleton.Field") && (views[y+1][x].getA().getClass().getName()!="skeleton.Field")){
+	    	            		if (((Switch)views[y][x].getA()).r1==views[y][x+1].getA()){
+	    	            			System.out.println("asd");
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y-1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x255A));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2554));
+	    			            	}
+	    	            		} else if (((Switch)views[y][x].getA()).r1==views[y-1][x].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y+1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2551));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x255A));
+	    			            	}
+	    	            		} else {
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x+1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2554));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2551));
+	    			            	}
+	    	            		}	
+	                		} else if((views[y][x-1].getA().getClass().getName()!="skeleton.Field") && (views[y][x+1].getA().getClass().getName()!="skeleton.Field") && (views[y+1][x].getA().getClass().getName()!="skeleton.Field")){
+	    	            		if (((Switch)views[y][x].getA()).r1==views[y][x-1].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x+1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2550));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2557));
+	    			            	}
+	    	            		} else if (((Switch)views[y][x].getA()).r1==views[y][x+1].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y+1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2554));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2550));
+	    			            	}
+	    	            		} else {
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x-1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2557));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2554));
+	    			            	}
+	    	            		}	
+	                		} else {
+	                			if (((Switch)views[y][x].getA()).r1==views[y][x-1].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x+1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x255D));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x2550));
+	    			            	}
+	    	            		} else if (((Switch)views[y][x].getA()).r1==views[y][x+1].getA()){
+	    	            			
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y-1][x].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x2550));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x255A));
+	    			            	}
+	    	            		} else {
+	    	            			if(((Switch)views[y][x].getA()).r2==views[y][x+1].getA() && ((Switch)views[y][x].getA()).dir){
+	    			            		button.setText(Character.toString((char)0x255A));
+	    			            	} else {
+	    			            		button.setText(Character.toString((char)0x255D));
+	    			            	}
+	    	            		}
+	                		}
 	            			  //Változás után
 	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
 	            			  
@@ -747,6 +932,7 @@ public class Form extends JFrame {
 		System.out.println("Nyertél :3");
 		logging("Skeleton: win()");
 		ind--;
+		System.exit(0);
 	}
 	/**
 	 * Vesztettél

@@ -216,7 +216,7 @@ Rail;19;null;20;5;6
 Rail;null;null;21;7;5
 Rail;21;null;22;6;5
 Switch;1;2;14;23;7;2
-Switch;15;2;3;24;5;2
+Switch;15;3;2;24;5;2
 Switch;17;6;7;25;2;5
 Switch;19;9;10;26;5;8
 Switch;21;12;13;27;8;5
