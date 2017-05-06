@@ -73,8 +73,6 @@ public class Form extends JFrame {
 	     
 	      for (int row = 0; row < ROWS; ++row) {
 	         for (int col = 0; col < COLS; ++col) {
-	        
-	        	 //if(views[row][col]==null)views[row][col]=new FieldView();
 	        	 
 	            JTextField f=new JTextField();
 	            String type = views[row][col].getA().getClass().getName();
@@ -197,20 +195,7 @@ public class Form extends JFrame {
 	            			  int x=button.getX()/60;
 	            			  int y=button.getY()/60;
 	            			  
-	            			  //Változás elõtt
-	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
-	            			  
-	            			  /*if(button.getText().equals("1")){
-	            				  button.setText("2");
-	            				  ((Switch)views[y][x].getA()).dir=false;
-	            			  } else {
-	            				  button.setText("1");
-	            				  ((Switch)views[y][x].getA()).dir=true;
-	            			  }*/
-	            			  
-	            			  System.out.println(((Switch)views[y][x].getA()).dir);
 	            			  ((Switch)views[y][x].getA()).setDir();
-	            			  System.out.println(((Switch)views[y][x].getA()).dir);
 	            			  if(views[y][x-1].getA().getClass().getName()!="skeleton.Field" && views[y-1][x].getA().getClass().getName()!="skeleton.Field" && views[y+1][x].getA().getClass().getName()!="skeleton.Field"){
 	      	            		if (((Switch)views[y][x].getA()).r1==views[y][x-1].getA()){
 	      	            			
@@ -235,7 +220,6 @@ public class Form extends JFrame {
 	    	            		} 
 	                  		} else if((views[y][x+1].getA().getClass().getName()!="skeleton.Field") && (views[y-1][x].getA().getClass().getName()!="skeleton.Field") && (views[y+1][x].getA().getClass().getName()!="skeleton.Field")){
 	    	            		if (((Switch)views[y][x].getA()).r1==views[y][x+1].getA()){
-	    	            			System.out.println("asd");
 	    	            			if(((Switch)views[y][x].getA()).r2==views[y-1][x].getA() && ((Switch)views[y][x].getA()).dir){
 	    			            		button.setText(Character.toString((char)0x255A));
 	    			            	} else {
@@ -300,8 +284,6 @@ public class Form extends JFrame {
 	    			            	}
 	    	            		}
 	                		}
-	            			  //Változás után
-	            			  //System.out.println(((Switch)views[y][x].getA()).dir);
 	            			  
 	            		  }
 	            	});

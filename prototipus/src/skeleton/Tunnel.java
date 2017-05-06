@@ -109,8 +109,9 @@ public class Tunnel extends Rail {
 		Skeleton.ind++;
 		Skeleton.logging("Tunnel: buildTunnel()");
 		
-		r3=new Rail(t, this, -1);
-		
+		r3=new Rail(null, null, -1);
+		r3.setNext(this);
+		r3.setPrev(t);
 		t.setBuilt();
 		t.setR3(r3);
 		
@@ -147,8 +148,9 @@ public class Tunnel extends Rail {
 	public void setBuilt(){	
 		Skeleton.ind++;
 		Skeleton.logging("Tunnel: setBuilt()");
-		
+		System.out.println(built);
 		built=!built;
+		System.out.println(built);
 		Skeleton.ind--;
 	}
 	
