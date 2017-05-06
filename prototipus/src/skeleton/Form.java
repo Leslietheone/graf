@@ -93,6 +93,7 @@ public class Form extends JFrame {
 	            	button.setForeground(Color.yellow);
 	            	if(((Switch)views[row][col].getA()).dir){
 	            		button.setText("1");
+	            		
 	            	} else {
 	            		button.setText("2");
 	            	}
@@ -120,6 +121,7 @@ public class Form extends JFrame {
 	            		  }
 	            	});
 	            	button.setBackground(new Color(205,133,63));
+	            	
 	            	cp.add(button);
 	            	break;
 	            
@@ -253,11 +255,12 @@ public class Form extends JFrame {
 	    	  }
 	    	  System.out.println("\n");
 	      }
-	      addTrain(1, 2, true);
+	      addTrain(1, 1, true);
 	      addElement(1,1);
-	      addElement(1,2);
-	      setTColor(1, 130,70,90,true);
-	      setTColor(1, 10,130,90,true);
+	      //addElement(1,2);
+	      setTColor(1, 255,0,0,true);
+	      //setTColor(1, 10,130,90,true);
+	      rePaint();
 	     
 	      timer=new Timer(1000, new ActionListener() {
 			@Override

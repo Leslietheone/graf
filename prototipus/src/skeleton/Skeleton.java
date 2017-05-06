@@ -578,6 +578,7 @@ public class Skeleton {
 		System.out.println("Nyertél :3");
 		logging("Skeleton: win()");
 		ind--;
+		System.exit(0);
 	}
 	/**
 	 * Vesztettél

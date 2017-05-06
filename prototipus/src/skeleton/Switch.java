@@ -31,7 +31,7 @@ public class Switch extends Rail{
 			}
 		}
 		
-		dir=false;
+		dir=true;
 		
 		Skeleton.ind++;
 		Skeleton.logging("Switch: konstruktor");
