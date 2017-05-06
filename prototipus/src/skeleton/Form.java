@@ -754,11 +754,23 @@ public class Form extends JFrame {
 			for(int j=0;j<trains.get(i).t.size();j++) {
 				for(int k=0;k<ROWS;k++) {
 					for(int l=0;l<COLS;l++) {
-						if(trains.get(i).t.get(j).r.id==views[k][l].getID()) {
+						if(trains.get(i).t.get(j).r.id==views[k][l].getID() ) {
 							
 							cp.getComponent(k*11+l).setBackground(trains.get(i).t.get(j).cNow);
 							int id=trains.get(i).t.get(j).rPrev.id;
-							
+							System.out.println("Prev "+id);
+							for(int m=0;m<ROWS;m++) {
+								for(int n=0;n<COLS;n++) {
+									if(views[m][n].getID()==id) {
+										cp.getComponent(m*11+n).setBackground(views[m][n].c);
+										
+									}
+								}
+							}
+						}
+						else if(trains.get(i).t.get(j).r.id==-1){
+							int id=trains.get(i).t.get(j).rPrev.id;
+							System.out.println("Prev "+id);
 							for(int m=0;m<ROWS;m++) {
 								for(int n=0;n<COLS;n++) {
 									if(views[m][n].getID()==id) {

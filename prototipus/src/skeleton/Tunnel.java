@@ -109,20 +109,21 @@ public class Tunnel extends Rail {
 		Skeleton.ind++;
 		Skeleton.logging("Tunnel: buildTunnel()");
 		
-		r3=new Rail(-1);
+		r3=new Rail(t, this, -1);
 		
 		t.setBuilt();
 		t.setR3(r3);
 		
-		r3.r1=t;
-		r3.r2=this;
 		
 		
 		this.setBuilt();
 		this.setR3(r3);
 		
-		r3.setNext(this);
-
+		//r3.setNext(this);
+		
+		//r3.r1=t;
+		//r3.r2=this;
+		
 		Skeleton.ind--;
 	}
 	
