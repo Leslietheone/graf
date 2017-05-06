@@ -255,11 +255,24 @@ public class Form extends JFrame {
 	    	  }
 	    	  System.out.println("\n");
 	      }
-	      addTrain(1, 1, true);
+	      
+	      Rail rtemp1=new Rail(-20);
+	      fields.add(rtemp1);
+	      Rail rtemp2=new Rail(rtemp1, -21);
+	      fields.add(rtemp2);
+	      Rail rtemp3=new Rail(rtemp2, -22);
+	      fields.add(rtemp3);
+	      RailView r=(RailView)views[7][0];
+	      Rail rtemp4=new Rail(rtemp3, r.r ,-23);
+	      fields.add(rtemp4);
+	      
+	      addTrain(1, -23, true);
 	      addElement(1,1);
-	      //addElement(1,2);
+	      addElement(1,2);
+	      addElement(1,3);
 	      setTColor(1, 255,0,0,true);
-	      //setTColor(1, 10,130,90,true);
+	      setTColor(2, 10,130,90,true);
+	      setTColor(3, 145,130,90,true);
 	      rePaint();
 	     
 	      timer=new Timer(1000, new ActionListener() {
