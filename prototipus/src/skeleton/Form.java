@@ -195,6 +195,8 @@ public class Form extends JFrame {
 	            			  int x=button.getX()/60;
 	            			  int y=button.getY()/60;
 	            			  
+	            			  if(((Switch)views[y][x].getA()).occupied)return;
+	            			  
 	            			  ((Switch)views[y][x].getA()).setDir();
 	            			  if(views[y][x-1].getA().getClass().getName()!="skeleton.Field" && views[y-1][x].getA().getClass().getName()!="skeleton.Field" && views[y+1][x].getA().getClass().getName()!="skeleton.Field"){
 	      	            		if (((Switch)views[y][x].getA()).r1==views[y][x-1].getA()){
@@ -353,10 +355,11 @@ public class Form extends JFrame {
             		    	    int y1=buttons.get(index).getY()/60;
             		    	    //Elõtte
 	             				//System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
-            		    	    ((Tunnel)views[y1][x1].getA()).setBuilt();
+            		    	    
 	             				if(index%2==1){
 	             					int x2=buttons.get(index-1).getX()/60;
 	            		    	    int y2=buttons.get(index-1).getY()/60;
+	            		    	    if(((Tunnel)views[y1][x1].getA()).occupied || ((Tunnel)views[y2][x2].getA()).occupied) return;
 	            		    	    ((Tunnel)views[y2][x2].getA()).setBuilt();
 	             					buttons.get(index).setText("");
 	             					buttons.get(index-1).setText("");
@@ -365,12 +368,14 @@ public class Form extends JFrame {
 	             				}else {
 	             					int x2=buttons.get(index+1).getX()/60;
 	            		    	    int y2=buttons.get(index+1).getY()/60;
+	            		    	    if(((Tunnel)views[y1][x1].getA()).occupied || ((Tunnel)views[y2][x2].getA()).occupied) return;
 	            		    	    ((Tunnel)views[y2][x2].getA()).setBuilt();
 	             					buttons.get(index).setText("");
 	             					buttons.get(index+1).setText("");
 	             					buttons.remove(index);
 	             					buttons.remove(index);
 	             				}
+	             				((Tunnel)views[y1][x1].getA()).setBuilt();
 	             				//Utána
 	             				//System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
 	             				return;
@@ -386,6 +391,7 @@ public class Form extends JFrame {
 	            		    	    int y1=buttons.get(buttons.size()-1).getY()/60;
 	            		    	    int x2=buttons.get(buttons.size()-2).getX()/60;
 	            		    	    int y2=buttons.get(buttons.size()-2).getY()/60;
+	            		    	    if(((Tunnel)views[y1][x1].getA()).occupied || ((Tunnel)views[y2][x2].getA()).occupied) return;
 	            		    	    //Építés elõtt
 	            		    	    //System.out.println(((Tunnel)views[y2][x2].getA()).tostr());
 	            		    	    //System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
