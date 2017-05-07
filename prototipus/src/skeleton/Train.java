@@ -86,8 +86,8 @@ public class Train implements Notifiable {
 			try {
 				b = te.r.pass(te.rPrev, te);	//lépteti az adott kocsit
 				if(b==false) Form.gameover(); //ha nem sikerült a lépés, vége a játéknak
-			} catch (IOException e) {
-				
+			} catch (Exception e) {
+				Form.gameover();
 			}
 			
 		}

@@ -148,7 +148,6 @@ public class Form extends JFrame {
 	            case "skeleton.Switch":
 	            	final JButton button=new JButton();
 	            	button.setForeground(Color.yellow);
-	            	
 	            	if((views[row][col-1].getA().getClass().getName()!="skeleton.Field") && (views[row-1][col].getA().getClass().getName()!="skeleton.Field") && (views[row+1][col].getA().getClass().getName()!="skeleton.Field")){
 	            		if (((Switch)views[row][col].getA()).r1==views[row][col-1].getA()){
 	            			
@@ -355,7 +354,7 @@ public class Form extends JFrame {
 	            		station.setText("");
 	            	}
 	            	
-	            	station.addActionListener(new ActionListener()
+	            	/*station.addActionListener(new ActionListener()
 	            	{
 	            		  public void actionPerformed(ActionEvent e)
 	            		  {
@@ -381,7 +380,7 @@ public class Form extends JFrame {
 	            			 //System.out.println(((Station)views[y][x].getA()).hasPassenger);
 	            		    
 	            		  }
-	            	});
+	            	});*/
 	            	
 	            	//Az egyszerûség kedvvért nem csináltam külön épületet
 	            	station.setBackground(views[row][col].getColor());
@@ -999,6 +998,10 @@ public class Form extends JFrame {
 			for(int j=0;j<trains.get(i).t.size();j++) {
 				for(int k=0;k<ROWS;k++) {
 					for(int l=0;l<COLS;l++) {
+						if (views[k][l].getA().getClass().getName().equals("skeleton.Station"))
+							if(!((Station)views[k][l].getA()).hasPassenger){
+								((JButton)cp.getComponent(k*11+l)).setText("");
+							}
 						if(trains.get(i).t.get(j).r.id==views[k][l].getID() ) {
 							
 							cp.getComponent(k*11+l).setBackground(trains.get(i).t.get(j).cNow);

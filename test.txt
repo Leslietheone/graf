@@ -209,7 +209,7 @@ Rail;null;null;13;8;4
 Rail;null;null;15;5;3
 Rail;15;null;16;5;4
 Rail;null;null;17;3;5
-Station;255;0;255;17;null;false;18;4;5
+Station;255;0;255;17;null;true;18;4;5
 Rail;null;null;19;5;7
 Rail;19;null;20;5;6
 Rail;null;null;21;7;5
@@ -222,7 +222,7 @@ Tunnel;5;6;null;28;2;3
 Tunnel;7;8;null;29;2;7
 Tunnel;10;11;null;30;7;8
 Tunnel;11;12;null;31;8;7
-Station;128;0;128;13;14;false;32;8;3
+Station;128;0;128;13;14;true;32;8;3
 Station;255;0;0;8;9;false;33;3;8
 CrossRail;16;20;18;22;34;5;5
 Tunnel;32;23;null;14;8;2
