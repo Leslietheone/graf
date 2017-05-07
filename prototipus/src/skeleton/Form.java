@@ -800,6 +800,7 @@ public class Form extends JFrame {
 					}else{
 						te.setrPrev(r.r2);
 					}
+					te.setPrev(trains.get(i).t.get(trains.get(i).t.size()-1));
 					trains.get(i).t.add(te);
 					r.setOccupied(true);
 				}

@@ -68,10 +68,12 @@ public class Station extends Rail{
 		Form.ind++;
 		Form.logging("Station: pass()");
 		
-		if(te.getPass()){
-			Color c=te.getNowColor();
-			if(c.getRGB()==clr.getRGB()){
-				Form.setTColor(te.id, 0,0,0, false);
+		if(te.e1!=null && te.e1.cNow.getRGB()==Color.BLACK.getRGB()){
+			if(te.getPass()){
+				Color c=te.getNowColor();
+				if(c.getRGB()==clr.getRGB()){
+					Form.setTColor(te.id, 0,0,0, false);
+				}
 			}
 		}
 		if(hasPassenger && clr.getRGB()==te.getBeforeColor().getRGB()) { //van utas és a kocsi üres, tehát felszállhatnak

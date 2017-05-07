@@ -148,9 +148,9 @@ public class Tunnel extends Rail {
 	public void setBuilt(){	
 		Form.ind++;
 		Form.logging("Tunnel: setBuilt()");
-		System.out.println(built);
+		//System.out.println(built);
 		built=!built;
-		System.out.println(built);
+		//System.out.println(built);
 		Form.ind--;
 	}
 	
