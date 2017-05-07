@@ -15,7 +15,11 @@ import java.util.Scanner;
 import javax.swing.Timer;
 
 import javax.swing.*;
-
+/**
+* A controller megvalósítása
+*
+* @author  KözvilágítáSCH
+*/
 public class Form extends JFrame {
 	public static Timer timer;
 	public View[][] views;
@@ -98,7 +102,8 @@ public class Form extends JFrame {
 	}
 	
 	
-	
+	/**A játék irányítása, pálya betöltés
+	 */
 	public void game() {
 		  trains=new ArrayList<Train>();
 		  fields=new ArrayList<Field>();
@@ -444,14 +449,12 @@ public class Form extends JFrame {
 	            		    	    int y2=buttons.get(buttons.size()-2).getY()/60;
 	            		    	    if(((Tunnel)views[y1][x1].getA()).occupied || ((Tunnel)views[y2][x2].getA()).occupied) return;
 	            		    	    //Építés elõtt
-	            		    	    //System.out.println(((Tunnel)views[y2][x2].getA()).tostr());
-	            		    	    //System.out.println(((Tunnel)views[y1][x1].getA()).tostr());
+	            		    	    
 	            		    	    ((Tunnel)views[y2][x2].getA()).buildTunnel(((Tunnel)views[y1][x1].getA()));
 	            		    	    buttons.get(buttons.size()-1).setText("Built");
 	            		    	    buttons.get(buttons.size()-2).setText("Built");
 	            		    	    //Építés után
-	            		    	    //System.out.println(((Tunnel)views[y2][x2].getA()).tostr());
-	            		    	    //System.out.println(((Tunnel)views[y1][x1].getA()).tostr());    		      
+	            		    	    		      
 	            		    }         			    
 	            		  }
 	            	});
@@ -472,13 +475,6 @@ public class Form extends JFrame {
 	      setTitle("közvilágítáSCH");
 	      setVisible(true);  
 	      
-	      
-	      /*for(int i=0;i<ROWS;i++) {
-	    	  for(int j=0;j<COLS;j++) {
-	    		  System.out.print(views[i][j].getID()+" ");
-	    	  }
-	    	  System.out.println("\n");
-	      }*/
 	      
 	      Rail rtemp1=new Rail(-20);
 	      fields.add(rtemp1);
@@ -505,8 +501,6 @@ public class Form extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				step();
-				//listTrain();
-				//System.out.println(trains.get(0).t.get(0).r.id);
 				rePaint();
 			}
 	    	  
@@ -533,14 +527,6 @@ public class Form extends JFrame {
 	
 	static ArrayList<Train> trains;
 	ArrayList<Field> fields;
-	/**
-	 * Konstruktor
-	 * @return nothing*/
-	//public Form() {
-		///trains=new ArrayList<Train>();
-		//fields=new ArrayList<Field>();
-		//views=new ArrayList<View>();
-	//}
 	
 	/**
 	 * A program fõmenüje
@@ -991,8 +977,8 @@ public class Form extends JFrame {
 	}
 	
 	
-	
-	
+	/**
+	 * A pálya elemek és a vonatelemk újrarajzolása*/	
 	public void rePaint(){
 		for(int i=0;i<trains.size();i++) {
 			for(int j=0;j<trains.get(i).t.size();j++) {
