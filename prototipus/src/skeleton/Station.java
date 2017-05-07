@@ -32,10 +32,10 @@ public class Station extends Rail{
 		clr=c;
 		hasPassenger=h;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Station: konstruktor");
+		Form.ind++;
+		Form.logging("Station: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -52,10 +52,10 @@ public class Station extends Rail{
 		clr=c;
 		hasPassenger=h;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Station: konstruktor");
+		Form.ind++;
+		Form.logging("Station: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -65,8 +65,8 @@ public class Station extends Rail{
 	 * @return sikerült e*/
 	@Override
 	public boolean pass(Rail r, TrainElement te) throws IOException{ //kocsi léptetése
-		Skeleton.ind++;
-		Skeleton.logging("Station: pass()");
+		Form.ind++;
+		Form.logging("Station: pass()");
 		
 		if(te.getPass()){
 			Color c=te.getNowColor();
@@ -90,7 +90,7 @@ public class Station extends Rail{
 			r2.setOccupied(true);
 			this.setOccupied(false);
 			
-		//	Skeleton.ind--;
+			Form.ind--;
 			return true;
 		}
 		else if (r==r2 && r1.getOccupied()==false) {
@@ -101,11 +101,11 @@ public class Station extends Rail{
 			r1.setOccupied(true);
 			this.setOccupied(false);
 			
-			//Skeleton.ind--;
+			Form.ind--;
 			return true;
 		}
 		else {
-			//Skeleton.ind--;
+			Form.ind--;
 			return false;
 		}
 	}

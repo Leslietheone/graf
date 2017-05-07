@@ -6,45 +6,48 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.io.*;
 /**
 * A controller
 *
 * @author  KözvilágítáSCH
 */
-public class Skeleton {
+/*public class Skeleton {
 	
 		
 	static int ind; //az aktuálisan kiírni kívánt szöveg behúzásának mértékét adja meg
 	static boolean log=true;
-	/**
+	*//**
 	 * megadott stringeket ír ki, az éppen aktuális mértékû behúzással együtt
 	 * @param s üzenet
-	 * @return nothing*/
+	 * @return nothing*//*
 	public static void logging(String s) {	
-		/*if (log){
+		if (log){
 			for(int i=0;i<ind;i++) System.out.print("   ");
 			System.out.print(s+"\n");
-		}*/
+		}
 	}
 	
 	
 	
 	static ArrayList<Train> trains;
 	ArrayList<Field> fields;
-	/**
+	*//**
 	 * Konstruktor
-	 * @return nothing*/
+	 * @return nothing*//*
 	public Skeleton() {
 		trains=new ArrayList<Train>();
 		fields=new ArrayList<Field>();
-	}
+	}*/
 	
 	/**
 	 * A program fõmenüje
 	 * @return nothing
 	 */
-	public void menu() throws IOException {		//menüpontok felsorolása, és a választottnak megfelelõ metódus elindítása
+/*	public void menu() throws IOException {		//menüpontok felsorolása, és a választottnak megfelelõ metódus elindítása
 		System.out.println("1. Play\n2. Test\n");
 		ArrayList<ArrayList<ArrayList<String>>> outputs=readFile("output.txt");
 		String s;
@@ -62,14 +65,14 @@ public class Skeleton {
 					test(Integer.parseInt(s)); break;
 			}
 			sc.close();
-	}
+	}*/
 	
 	
 	/**
 	 * Teszteléshez használatos fájlok beolvasása
 	 * @param filename Fájl név
 	 * @return parancsok beolvasva*/
-	private ArrayList<ArrayList<ArrayList<String>>> readFile(String filename)
+/*	private ArrayList<ArrayList<ArrayList<String>>> readFile(String filename)
 	{
 	  ArrayList<ArrayList<ArrayList<String>>> maps = new ArrayList<ArrayList<ArrayList<String>>>();
 	  try
@@ -103,23 +106,23 @@ public class Skeleton {
 	    return null;
 	  }
 	}
-	
+	*/
 	/**
 	 * Teszt betöltése
 	 * @param i teszt sorszám
 	 * @return nothing*/
-	public void test(int i){
+/*	public void test(int i){
 		ArrayList<ArrayList<ArrayList<String>>> db = readFile("test.txt");
 		ArrayList<ArrayList<ArrayList<String>>> cmds = readFile("cmds.txt");
 		loadCmds(i, cmds, db);	
 	}
-	
+	*/
 	/**
 	 * A teszthez szükséges pálya beolvasása
 	 * @param id azonosító
 	 * @param db pálya adatbázis
 	 * @return nothing*/
-	public void loadMap(int id, ArrayList<ArrayList<ArrayList<String>>> db) {
+/*	public void loadMap(int id, ArrayList<ArrayList<ArrayList<String>>> db) {
 		
 		ArrayList<ArrayList<String>>field=db.get(id);
 		for (int i=0; i<field.size(); i++){
@@ -183,7 +186,7 @@ public class Skeleton {
 			}
 		}
 
-	}
+	}*/
 	
 	/**
 	 * Parancsok beolvasása az adott teszthez
@@ -191,7 +194,7 @@ public class Skeleton {
 	 * @param cmds parancsok a teszthez
 	 * @param db pálya
 	 * @return nothing*/
-	public void loadCmds(int id, ArrayList<ArrayList<ArrayList<String>>> cmds, ArrayList<ArrayList<ArrayList<String>>> db) {
+	/*public void loadCmds(int id, ArrayList<ArrayList<ArrayList<String>>> cmds, ArrayList<ArrayList<ArrayList<String>>> db) {
 		ArrayList<ArrayList<String>>cCmds=cmds.get(id);
 		
 		for (int i=0; i<cCmds.size(); i++){
@@ -211,12 +214,12 @@ public class Skeleton {
 				case "setColor": setTColor(Integer.parseInt(cCmd.get(1)), Integer.parseInt(cCmd.get(2)), Integer.parseInt(cCmd.get(3)), Integer.parseInt(cCmd.get(4)), true);break;
 			}
 		}		
-	}
+	}*/
 	
 	/**
 	 * Játék menüje
 	 * @return nothing*/
-	public void play() throws IOException {		//menüpontok felsorolása, és a választottnak megfelelõ metódus elindítása
+	/*public void play() throws IOException {		//menüpontok felsorolása, és a választottnak megfelelõ metódus elindítása
 		
 		Scanner sc=new Scanner(System.in);
 		
@@ -240,12 +243,12 @@ public class Skeleton {
 			}
 		}
 			sc.close();
-	}
+	}*/
 	
 	/**
 	 * Pálya építése játék módban
 	 * @return nothing*/
-	public void loadMap() {
+	/*public void loadMap() {
 		Scanner sc=new Scanner(System.in);
 		String s="";
 		
@@ -355,7 +358,7 @@ public class Skeleton {
 						break;
 				}
 		} while(sc.hasNext());
-	}
+	}*/
 	
 	/**
 	 * Új vonat adása a pályára
@@ -363,7 +366,7 @@ public class Skeleton {
 	 * @param RailId sínazonosító
 	 * @param dir irány
 	 * @return nothing*/
-	public void addTrain(int id, int RailId, boolean dir) {
+	/*public void addTrain(int id, int RailId, boolean dir) {
 		Rail rail=new Rail(0);
 		for(int i=0;i<fields.size();i++) {
 			if(fields.get(i).id==RailId) rail=(Rail) fields.get(i); 
@@ -374,13 +377,13 @@ public class Skeleton {
 			trains.add(new Train(rail,rail.r2, id));
 		}
 	}
-	
+	*/
 	/**
 	 * Új Element a Trainhez. WARNING: egy létrejött train üres, amíg nem adsz hozzá elemet!
 	 * @param TRid vonat azonosítója
 	 * @param TEid vonatelem azonosítója
 	 * @return nothing*/
-	public void addElement(int TRid, int TEid) {
+	/*public void addElement(int TRid, int TEid) {
 		Rail r=new Rail(0);
 		for(int i=0;i<trains.size()+1;i++) {
 			if(trains.get(i).id==TRid) {
@@ -410,13 +413,13 @@ public class Skeleton {
 			}
 		}
 		
-	}
+	}*/
 	
 	/**
 	 * Váltóállítás
 	 * @param Sid váltó id
 	 * @return nothing*/
-	public void setSwitch(int Sid) {
+	/*public void setSwitch(int Sid) {
 		for(int i=0;i<fields.size();i++) {
 			if(fields.get(i).id==Sid)  {
 				Switch s=(Switch)fields.get(i);
@@ -425,14 +428,14 @@ public class Skeleton {
 				fields.add(s);
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * Tunnel építés, a megadott két Tunnel közt
 	 * @param ENDid alagútvég id
 	 * @param BEGINid alagút eleje id
 	 * @return nothing*/
-	public void buildTunnels(int ENDid, int BEGINid) {
+	/*public void buildTunnels(int ENDid, int BEGINid) {
 		Tunnel begin=new Tunnel(0);
 		for(int i=0;i<fields.size();i++) {
 			if(fields.get(i).id==BEGINid) {
@@ -451,14 +454,14 @@ public class Skeleton {
 				break;
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * Utast pakolhatsz az állomásra. DEFAULT: nincs.
 	 * @param Sid állomás id
 	 * @param b van e utas
 	 * @return nothing*/
-	public void setPassengers(int Sid, String b) {
+	/*public void setPassengers(int Sid, String b) {
 		boolean p; 
 		if(b.matches("false")) p=false;
 		else p=true;
@@ -471,11 +474,11 @@ public class Skeleton {
 				
 			}
 		}
-	}
+	}*/
 	/**
 	 * Vonatok listázása
 	 * @return nothing*/
-	public void listTrain() {
+	/*public void listTrain() {
 		for(int i=0;i<trains.size();i++) {
 			System.out.print("Train id: "+trains.get(i).id);
 			for (int j=0; j<trains.get(i).t.size();j++){
@@ -483,22 +486,22 @@ public class Skeleton {
 			}
 			System.out.print("\n");
 		}
-	}
+	}*/
 	/**
 	 * Vonatelemek listázása
 	 * @return nothing*/
-	public void listTrainElement() {
+	/*public void listTrainElement() {
 		for(int i=0;i<trains.size();i++) {
 			for(int j=0;j<trains.get(i).t.size();j++) {
 				System.out.println(trains.get(i).t.get(j).tostr());
 				
 			}
 		}
-	}
+	}*/
 	/**
 	 * Pálya listázása
 	 * @return nothing*/
-	public void listMap() {
+	/*public void listMap() {
 		for(int i=0;i<fields.size();i++) {
 			
 			
@@ -529,12 +532,12 @@ public class Skeleton {
 			}
 			
 		}
-	}
+	}*/
 	
 	/**
 	 * Léptet, figyeli hogy nyertél e
 	 * @return nothing*/
-	public void step() {
+	/*public void step() {
 		boolean b=false;
 		for(int i=0;i<trains.size();i++) {
 			trains.get(i).notifyTrain();
@@ -542,8 +545,8 @@ public class Skeleton {
 				b=true;
 			}
 		}
-		if(b==true) win();
-	}
+		if(b==true) Form.win();
+	}*/
 	
 	/**
 	 * Kiválasztott TrainElement szín állítás, mert: default mindegyik üres
@@ -553,7 +556,7 @@ public class Skeleton {
 	 * @param b RGB blue
 	 * @param first elsõ e a vonatban a kocsi
 	 * @return nothing*/
-	public static void setTColor(int id, int r, int g, int b, boolean first) {
+	/*public static void setTColor(int id, int r, int g, int b, boolean first) {
 		for(int i=0;i<trains.size();i++) {
 			for(int j=0;j<trains.get(i).t.size();j++) {
 				if (trains.get(i).t.get(j).id==id) {
@@ -568,26 +571,29 @@ public class Skeleton {
 				
 			}
 		}
-	}
+	}*/
 	
-	/**
-	 * Gyõzelem
-	 * @return nothing*/
-	public void win() {	//gyõzelem jelzõ
-		ind++;
-		System.out.println("Nyertél :3");
-		logging("Skeleton: win()");
-		ind--;
-		System.exit(0);
-	}
-	/**
-	 * Vesztettél
-	 * @return nothing*/
-	static public void gameover() {	//vereség jelzõ
-		ind++;
-		System.out.println("Vesztettél :P");
-		logging("Skeleton: gameover()");
-		ind--;
-		System.exit(0);
-	}
-}
+	///**
+	// * Gyõzelem
+	 //* @return nothing*/
+	//public static void win() {	//gyõzelem jelzõ
+		//ind++;
+		//System.out.println("Nyertél :3x");
+		//logging("Skeleton: win()");
+		//ind--;
+	//	JOptionPane.showMessageDialog(null, "Nyertél!");
+	//	System.exit(0);
+	//}
+	///**
+	// * Vesztettél
+	// * @return nothing */
+	//static public void gameover() {	//vereség jelzõ
+	//	ind++;
+		//System.out.println("Vesztettél :Px");
+		//logging("Skeleton: gameover()");
+		//ind--;
+	//	Form.timer.stop();
+	//	JOptionPane.showMessageDialog(null, "Vesztettél!");
+	//	System.exit(0);
+	//}
+//}

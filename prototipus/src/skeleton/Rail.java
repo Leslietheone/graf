@@ -21,8 +21,8 @@ public class Rail extends Field{
 	public Rail(Rail r1, Rail r2, int id){	//az az eset, mikor a két szomszédos sín már létezik, kölcsönösen összekapcsolódnak
 		super(id);
 		
-		Skeleton.ind++;
-		Skeleton.logging("Rail: konstruktor");
+		Form.ind++;
+		Form.logging("Rail: konstruktor");
 		
 		//saját pointerek, és a szomszéd sínek pointereinek beállítása:
 		
@@ -45,7 +45,7 @@ public class Rail extends Field{
 		}
 		  
 		occupied=false;	//a létrehozás pillanatában nem foglaltak a sínek
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail konstruktor
@@ -56,8 +56,8 @@ public class Rail extends Field{
 	public Rail(Rail r1, int id){ //amikor még csak az elõzõ sín létezik, kölcsönösen összekkapcsolja magukat
 		super(id);
 		
-		Skeleton.ind++;
-		Skeleton.logging("Rail: konstruktor");
+		Form.ind++;
+		Form.logging("Rail: konstruktor");
 		
 		if (r1!=null){
 			this.r1=r1;
@@ -69,7 +69,7 @@ public class Rail extends Field{
 		}
 		
 		occupied=false;
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail konstruktor
@@ -79,11 +79,11 @@ public class Rail extends Field{
 	public Rail(int id){	//az elsõ sín létrehozásához, akinek nincsenek még szomszédjai
 		super(id);
 		
-		Skeleton.ind++;
-		Skeleton.logging("Rail: konstruktor");
+		Form.ind++;
+		Form.logging("Rail: konstruktor");
 		
 		occupied=false;
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail pass metódusa, mely a továbbítást szolgálja. A rajta tartózkodó TrainELementet továbbítja
@@ -92,8 +92,8 @@ public class Rail extends Field{
 	   * @return boolean A lépés sikerességét visszajelzõ igaz/hamis érték
 	   */
 	public boolean pass(Rail pre, TrainElement te) throws IOException{	//a sínen található kocsi mozgatása, a kocsi elsõzõ sínje alapján
-		Skeleton.ind++;
-		Skeleton.logging("Rail: pass()");
+		Form.ind++;
+		Form.logging("Rail: pass()");
 		
 		
 		if (r1==pre && r2.getOccupied()==false){	//ha az r1 felõl jött, akkor az r2 felé tart, így ha az nem foglalt akkor léphet.
@@ -102,7 +102,7 @@ public class Rail extends Field{
 			te.setrPrev(this);			
 			r2.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;		//sikeres volt a léptetés
 		} else if (r2==pre && r1.getOccupied()==false) {	//ha az r2 felõl jött, akkor az r1 felé tart, így ha az nem foglalt akkor léphet.
 			//a kocsi pointereinek állítása, valamint a sínek foglaltságának állítása:
@@ -110,10 +110,10 @@ public class Rail extends Field{
 			te.setrPrev(this);			
 			r1.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;		//sikeres volt a léptetés
 		} else {
-			Skeleton.ind--;
+			Form.ind--;
 			return false;
 		}
 	}
@@ -123,12 +123,12 @@ public class Rail extends Field{
 	   * @return Nothing.
 	   */
 	public void setOccupied(boolean b){ //foglaltság állítás
-		Skeleton.ind++;
-		Skeleton.logging("Rail: setOccupied()");
+		Form.ind++;
+		Form.logging("Rail: setOccupied()");
 		
 		//ellenkezõjére állítja a foglaltságot
 		occupied=b;
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail: occupied getter
@@ -136,10 +136,10 @@ public class Rail extends Field{
 	   * @return boolean A kért igaz/hamis érték 
 	   */
 	public boolean getOccupied() throws IOException{ //foglaltság lekérdezése
-		Skeleton.ind++;
-		Skeleton.logging("Rail: getOccupied()");
+		Form.ind++;
+		Form.logging("Rail: getOccupied()");
 		//a tesztelhetõség miatt a felhasználó dönti el hogy foglalt legyen e a sín, vagy sem
-		Skeleton.ind--;
+		Form.ind--;
 		return occupied;
 		
 	}
@@ -149,12 +149,12 @@ public class Rail extends Field{
 	   * @return Nothing.
 	   */
 	public void setPrev(Rail r1){	//következõ sín beállítása, egyoldaló kapcsolatépítés
-		Skeleton.ind++;
-		Skeleton.logging("Rail: setPrev()");
+		Form.ind++;
+		Form.logging("Rail: setPrev()");
 		
 		this.r1 = r1;
 		//r1.setNext(this);
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail: r2 tagváltozó settere
@@ -162,11 +162,11 @@ public class Rail extends Field{
 	   * @return Nothing.
 	   */
 	public void setNext(Rail r2){	//elõzõ sín beállítása, egyoldalú kapcsolat építés
-		Skeleton.ind++;
-		Skeleton.logging("Rail: setNext()");
+		Form.ind++;
+		Form.logging("Rail: setNext()");
 		
 		this.r2 = r2;
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * Rail: r1 getter

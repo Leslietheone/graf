@@ -19,8 +19,8 @@ public class CrossRail extends Rail{
 	   */
 	public CrossRail(Rail r1, int id) {
 		super(id);
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: konstruktor");;
+		Form.ind++;
+		Form.logging("CrossRail: konstruktor");;
 		
 		if (r1!=null){
 			this.r1=r1;
@@ -31,7 +31,7 @@ public class CrossRail extends Rail{
 			}
 		}
 		
-		Skeleton.ind--;
+		Form.ind--;
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -43,8 +43,8 @@ public class CrossRail extends Rail{
 	   */
 	public CrossRail(Rail r1, Rail r2, int id) {
 		super( id);
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: konstruktor");;
+		Form.ind++;
+		Form.logging("CrossRail: konstruktor");;
 				
 		if (r1!=null){
 			this.r1=r1;
@@ -77,8 +77,8 @@ public class CrossRail extends Rail{
 	   */
 	public CrossRail(Rail r1, Rail r2, Rail r3, int id) {
 		super( id);
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: konstruktor");;
+		Form.ind++;
+		Form.logging("CrossRail: konstruktor");;
 		
 		if (r1!=null){
 			this.r1=r1;
@@ -122,8 +122,8 @@ public class CrossRail extends Rail{
 	   */
 	public CrossRail(Rail r1, Rail r2, Rail r3, Rail r4,  int id) {
 		super( id);
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: konstruktor");;
+		Form.ind++;
+		Form.logging("CrossRail: konstruktor");;
 		
 		if (r1!=null){
 			this.r1=r1;
@@ -161,7 +161,7 @@ public class CrossRail extends Rail{
 			}
 		}
 		
-		Skeleton.ind--;
+		Form.ind--;
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -170,8 +170,8 @@ public class CrossRail extends Rail{
 	   * @return Nothing.
 	   */
 	public void setR3(Rail r) {
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: setR4()");
+		Form.ind++;
+		Form.logging("CrossRail: setR4()");
 		
 		this.r3=r3;
 		if (r3.getR2()==null){
@@ -180,7 +180,7 @@ public class CrossRail extends Rail{
 			r3.setPrev(this);
 		}
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * R4 settere
@@ -188,8 +188,8 @@ public class CrossRail extends Rail{
 	   * @return Nothing.
 	   */
 	public void setR4(Rail r) {
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: setR4()");
+		Form.ind++;
+		Form.logging("CrossRail: setR4()");
 		
 		
 		this.r4=r4;
@@ -199,7 +199,7 @@ public class CrossRail extends Rail{
 			r4.setNext(this);
 		}
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	/**
 	   * CrossRail pass metódusa, mely a továbbítást szolgálja. A rajta tartózkodó TrainELementet továbbítja
@@ -209,8 +209,8 @@ public class CrossRail extends Rail{
 	   */
 	@Override
 	public boolean pass(Rail pre, TrainElement te) throws IOException{	//a sínen található kocsi mozgatása, a kocsi elsõzõ sínje alapján
-		Skeleton.ind++;
-		Skeleton.logging("CrossRail: pass()");
+		Form.ind++;
+		Form.logging("CrossRail: pass()");
 		
 		if (r1==pre && r2.getOccupied()==false){	//ha az r1 felõl jött, akkor az r2 felé tart, így ha az nem foglalt akkor léphet.
 			//a kocsi pointereinek állítása, valamint a sínek foglaltságának állítása:
@@ -218,7 +218,7 @@ public class CrossRail extends Rail{
 			te.setrPrev(this);			
 			r2.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;		//sikeres volt a léptetés
 		} else if (r2==pre && r1.getOccupied()==false) {	//ha az r2 felõl jött, akkor az r1 felé tart, így ha az nem foglalt akkor léphet.
 			//a kocsi pointereinek állítása, valamint a sínek foglaltságának állítása:
@@ -226,25 +226,25 @@ public class CrossRail extends Rail{
 			te.setrPrev(this);			
 			r1.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;		//sikeres volt a léptetés
 		} else if(r3==pre && r4.getOccupied()==false){
 			te.setRail(r4);
 			te.setrPrev(this);			
 			r4.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;
 		} else if(r4==pre && r3.getOccupied()==false){
 			te.setRail(r3);
 			te.setrPrev(this);			
 			r3.setOccupied(true);
 			this.setOccupied(false);
-			Skeleton.ind--;
+			Form.ind--;
 			return true;
 		}
 		else {
-			Skeleton.ind--;
+			Form.ind--;
 			return false;
 		}
 	}

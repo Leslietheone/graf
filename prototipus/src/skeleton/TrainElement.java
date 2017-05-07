@@ -30,9 +30,9 @@ public class TrainElement {
 		this.id=id;
 		this.cBefore=c;
 		this.cNow=c;
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: Konstruktor");
-		Skeleton.ind--;		
+		Form.ind++;
+		Form.logging("TrainElement: Konstruktor");
+		Form.ind--;		
 	}
 	
 	/**
@@ -42,9 +42,9 @@ public class TrainElement {
 	 */
 	public void setNowColor(Color c){	//kocsi jelenlegi színének állítása
 		this.cNow=c;
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setNowColor()"+c);
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: setNowColor()"+c);
+		Form.ind--;
 	}
 	
 	/**
@@ -54,9 +54,9 @@ public class TrainElement {
 	 */
 	public void setBeforeColor(Color c){	//kocsi eredeti színének állítása
 		this.cBefore=c;
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setColor()"+c);
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: setColor()"+c);
+		Form.ind--;
 	}  
 	
 	/**
@@ -64,9 +64,9 @@ public class TrainElement {
 	 * @return Szín
 	 */
 	public Color getNowColor(){	//kocsi eredeti színének olvasása
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: getNowColor()");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: getNowColor()");
+		Form.ind--;
 		return this.cNow;
 	}
 	
@@ -74,9 +74,9 @@ public class TrainElement {
 	 * TrainElement korábbi színének lekérdezése
 	 * @return Szín*/
 	public Color getBeforeColor(){	//kocsi jelenlegi színének olvasása
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: getBeforeColor()");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: getBeforeColor()");
+		Form.ind--;
 		return this.cBefore;
 	}
 	
@@ -85,9 +85,9 @@ public class TrainElement {
 	 * @param r Sín
 	 * @return nothing*/
 	public void setRail(Rail r){	//aktuális sín
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setRail()");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: setRail()");
+		Form.ind--;
 		
 		this.r=r;
 	}
@@ -98,9 +98,9 @@ public class TrainElement {
 	 * @return nothing
 	 */
 	public void setrPrev(Rail r){	//elõzõ sín (a haladási irány eldöntéséhez)
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setrPrev()");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: setrPrev()");
+		Form.ind--;
 		
 		this.rPrev=r;
 	}
@@ -109,9 +109,9 @@ public class TrainElement {
 	 * A TrainElement láthatóságának állítása
 	 * @return nothing*/
 	public void setVis(){	//láthatóság állítása
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setVis()");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("TrainElement: setVis()");
+		Form.ind--;
 		if(vis==false) vis=true;
 		else vis=false;
 	}
@@ -121,14 +121,14 @@ public class TrainElement {
 	 * @param e következõ TrainElement
 	 * @return nothing*/
 	public void setNext(TrainElement e){	//következõ kocsi
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setNext()");
+		Form.ind++;
+		Form.logging("TrainElement: setNext()");
 		
 	
 		this.e2=e;
 		e.setPrev(this);
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -137,12 +137,12 @@ public class TrainElement {
 	 * @return nothing*/
 	public void setPrev(TrainElement e){	//elõzõ kocsi
 		
-		Skeleton.ind++;
-		Skeleton.logging("TrainElement: setPrev()");
+		Form.ind++;
+		Form.logging("TrainElement: setPrev()");
 		
 		this.e1=e;
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**

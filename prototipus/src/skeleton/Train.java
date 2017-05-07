@@ -24,14 +24,14 @@ public class Train implements Notifiable {
 	public Train (Rail r, Rail rPrev, int id) {
 		this.id=id;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Train: konstruktor");
+		Form.ind++;
+		Form.logging("Train: konstruktor");
 		this.r=r;
 		this.rPrev=rPrev;
 		
 		t=new ArrayList<TrainElement>();
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -50,8 +50,8 @@ public class Train implements Notifiable {
 	 * Megvizsgálja üres e a vonatunk
 	 * @return üres e*/
 	public boolean empty() {	//kocsik ürességének lekérdezése
-		Skeleton.ind++;
-		Skeleton.logging("Train: empty()");
+		Form.ind++;
+		Form.logging("Train: empty()");
 		
 		boolean e=true; //üresvonatka
 		Color c1=new Color(0,0,0);
@@ -63,13 +63,12 @@ public class Train implements Notifiable {
 				Color ctemp=te.getNowColor();
 				if(ctemp.getRGB()!=c1.getRGB()) {
 					e=false;
-					Skeleton.logging("false, "+t.get(i).getNowColor());
-					
+					Form.logging("false, "+t.get(i).getNowColor());
 				}
 			}
 		}
 		
-		Skeleton.ind--;
+		Form.ind--;
 		return e;
 	}
 
@@ -78,20 +77,20 @@ public class Train implements Notifiable {
 	 * @return nothing*/
 	@Override
 	public void notifyTrain() {	//lépés jelzésének fogadása
-		Skeleton.ind++;
-		Skeleton.logging("Train: notifyTrain()");
+		Form.ind++;
+		Form.logging("Train: notifyTrain()");
 		
 		
 		for(TrainElement te : t){		//végigmegy a kocsikon
 			boolean b;
 			try {
 				b = te.r.pass(te.rPrev, te);	//lépteti az adott kocsit
-				if(b==false) Skeleton.gameover();	//ha nem sikerült a lépés, vége a játéknak
+				if(b==false) Form.gameover(); //ha nem sikerült a lépés, vége a játéknak
 			} catch (IOException e) {
 				
 			}
 			
 		}
-		Skeleton.ind--;
+		Form.ind--;
 	}
 }

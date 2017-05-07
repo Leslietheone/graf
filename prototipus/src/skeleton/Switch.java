@@ -33,9 +33,9 @@ public class Switch extends Rail{
 		
 		dir=true;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Switch: konstruktor");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("Switch: konstruktor");
+		Form.ind--;
 	}
 	
 	/**
@@ -50,9 +50,9 @@ public class Switch extends Rail{
 		
 		dir=false;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Switch: konstruktor");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("Switch: konstruktor");
+		Form.ind--;
 	}
 	
 	/**
@@ -65,22 +65,22 @@ public class Switch extends Rail{
 		super(r1, id);
 		dir=false;
 		
-		Skeleton.ind++;
-		Skeleton.logging("Switch: konstruktor");
-		Skeleton.ind--;
+		Form.ind++;
+		Form.logging("Switch: konstruktor");
+		Form.ind--;
 	}
 	
 	/**
 	 * A váltó irányának állítása
 	 * @return nothing*/
 	public void setDir(){		//irány állítása
-		Skeleton.ind++;
-		Skeleton.logging("Switch: setDir()");
+		Form.ind++;
+		Form.logging("Switch: setDir()");
 		
 		if(dir==false) dir=true;
 		else dir=false;
 		
-		 Skeleton.ind--;
+		 Form.ind--;
 	 }
 	 
 	/**
@@ -89,8 +89,8 @@ public class Switch extends Rail{
 	 * @param te a vonatelem
 	 * @return sikerült e*/
 	 public boolean pass(Rail r, TrainElement te) throws IOException{ //kocsi léptetése
-		 Skeleton.ind++;
-		 Skeleton.logging("Switch: pass()");
+		 Form.ind++;
+		 Form.logging("Switch: pass()");
 			
 		 if (r==r1 && dir==true && r2.getOccupied()==false){ 	//ha a kiválasztott irányban szabad a kimenet
 			te.setRail(r2);
@@ -98,7 +98,7 @@ public class Switch extends Rail{
 		 	this.r2.setOccupied(true);
 			this.setOccupied(false);
 			
-			Skeleton.ind--;
+			Form.ind--;
 			return true;
 		 }else if(r==r1 && dir==false && r3.getOccupied()==false){		//ha a kiválasztott irányban szabad a kimenet
 			 te.setRail(r3);
@@ -106,7 +106,7 @@ public class Switch extends Rail{
 			 this.r3.setOccupied(true);
 		   	 this.setOccupied(false);
 			
-		   	 Skeleton.ind--;
+		   	 Form.ind--;
 		   	 return true;
 		 }else if(r==r2 && dir==true && r1.getOccupied()==false) {
 			 te.setRail(r1);
@@ -114,7 +114,7 @@ public class Switch extends Rail{
 			 this.r1.setOccupied(true);
 			 this.setOccupied(false);
 				
-			 Skeleton.ind--;
+			 Form.ind--;
 			 return true;
 		 }else if(r==r3 && dir==false && r1.getOccupied()==false) {
 			 te.setRail(r1);
@@ -122,12 +122,12 @@ public class Switch extends Rail{
 			 this.r1.setOccupied(true);
 			 this.setOccupied(false);
 				
-			 Skeleton.ind--;
+			 Form.ind--;
 			 return true;
 		 }
 		 
 		 else  {		//ha nem tudott lépni
-			 Skeleton.ind--;
+			 Form.ind--;
 			 return false;
 		 }
 	 }
@@ -137,8 +137,8 @@ public class Switch extends Rail{
 	  * @param r3 harmadik szomszéd
 	  * @return nothing*/
 	 public void setR3(Rail r3){
-		 Skeleton.ind++;
-		 Skeleton.logging("Switch: setR3()");
+		 Form.ind++;
+		 Form.logging("Switch: setR3()");
 		 this.r3=r3;
 		 //r3 irányának eldöntése
 		 if (r3.getR1()==null){
@@ -147,7 +147,7 @@ public class Switch extends Rail{
 			 r3.setNext(this);
 		 }
 		 
-		 Skeleton.ind--;
+		 Form.ind--;
 	 }
 	 
 	 /**
@@ -155,10 +155,10 @@ public class Switch extends Rail{
 	  * @param r2 második szomszéd
 	  * @return nothing*/
 	 public void setR2(Rail r2) {
-		 Skeleton.ind++;
-		 Skeleton.logging("Switch: setR2()");
+		 Form.ind++;
+		 Form.logging("Switch: setR2()");
 		 this.r2=r2;
-		 Skeleton.ind--;
+		 Form.ind--;
 	 }
 	 /**
 	  * Stringként visszaadja a Switch adatait

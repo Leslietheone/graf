@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ import javax.swing.Timer;
 import javax.swing.*;
 
 public class Form extends JFrame {
-	public Timer timer;
+	public static Timer timer;
 	public View[][] views;
 	
 	public static final int ROWS = 11;
@@ -26,21 +27,21 @@ public class Form extends JFrame {
 	public static final int CANVAS_HEIGHT = CELL_SIZE * ROWS;
 	public ArrayList<JButton> buttons;
 	public Container cp;
-	 
+	
 	// itt lehet majd megadni az elemeket amik szerepelnem a megjelenítésben, nem int[][] hanem view[][] lesz
 	//itt lehet majd a view-kon végigiterálni és meghívni az "újrarajzol függvényt"
-	private int[][] board =
-	      {	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
-	    	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
-	    	  {0,0, 1, 5, 1, 2, 1, 5, 1, 0,0},
-	    	  {0,0, 1, 0, 0, 1, 0, 0, 3, 4,0},
-	    	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
-	    	  {0,0, 2, 1, 1, 1, 1, 1, 2, 0,0},
-	    	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
-	    	  {1,1, 2, 0, 0, 1, 0, 0, 5, 0,0},
-	    	  {0,0, 1, 3, 1, 2, 1, 5, 1, 0,0},
-	    	  {0,0, 0, 4, 0, 0, 0, 0, 0, 0,0},
-	    	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0}};
+	//private int[][] board =
+	     // {	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+	    //	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0},
+	    //	  {0,0, 1, 5, 1, 2, 1, 5, 1, 0,0},
+	    //	  {0,0, 1, 0, 0, 1, 0, 0, 3, 4,0},
+	    //	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
+	    //	  {0,0, 2, 1, 1, 1, 1, 1, 2, 0,0},
+	    //	  {0,0, 1, 0, 0, 1, 0, 0, 1, 0,0},
+	    //	  {1,1, 2, 0, 0, 1, 0, 0, 5, 0,0},
+	    	//  {0,0, 1, 3, 1, 2, 1, 5, 1, 0,0},
+	    //	  {0,0, 0, 4, 0, 0, 0, 0, 0, 0,0},
+	    //	  {0,0, 0, 0, 0, 0, 0, 0, 0, 0,0}};
 	   //1: sín
 	   //2: váltó
 	   //3: állomás
@@ -48,10 +49,61 @@ public class Form extends JFrame {
 	   //5: alagút, többre is mûködik
 	   
 	   /** ez a konstruktor hozzá, a változásokat majd a függvény végzi */
-	   public Form() {
+	public Form(){
+		cp=getContentPane();
+	    cp.setLayout(new GridLayout(6,3));
+	    JButton newgame =new JButton("Új Játék");
+	    newgame.addActionListener(new ActionListener()
+	    {
+    		  public void actionPerformed(ActionEvent e)
+    		  {
+    			  cp.removeAll();
+    			  game();
+    			  
+    		  }
+    	});
+	    JButton exit=new JButton("Kilépés");
+	    exit.addActionListener(new ActionListener()
+    	{
+    		  public void actionPerformed(ActionEvent e)
+    		  {
+    			  System.exit(0);
+    		  }
+    	});
+	    
+	    for(int i=1;i<=6;i++){
+	    	for(int j=1;j<=3;j++){
+	    		
+	    	
+	    		if(i==2 && j==2){
+	    			newgame.setSize(new Dimension(60,30));
+	    			cp.add(newgame);
+	    		}
+	    		else if(i==4 &&j==2){
+	    			exit.setSize(new Dimension(60,30));
+	    			cp.add(exit);
+	    		}
+	    		else{
+	    			cp.add(new Label());
+	    		}
+	    	}
+	    }
+	    
+	    cp.setPreferredSize(new Dimension(600,300));
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    pack();
+	    setTitle("közvilágítáSCH");
+	    setVisible(true); 
+		
+	}
+	
+	
+	
+	public void game() {
 		  trains=new ArrayList<Train>();
 		  fields=new ArrayList<Field>();
 		  views=new View[ROWS][COLS];
+		  
 		  
 		  for (int row = 0; row < ROWS; ++row) {
 		         for (int col = 0; col < COLS; ++col) {
@@ -60,11 +112,11 @@ public class Form extends JFrame {
 		         }
 		  }
 		  
-		  System.out.println("Ird be a palya szamat!");
-		  Scanner sc=new Scanner(System.in);
-		  String s=sc.next();
+		  //System.out.println("Ird be a palya szamat!");
+		  //Scanner sc=new Scanner(System.in);
+		  //String s=sc.next();
 		  ArrayList<ArrayList<ArrayList<String>>> db = readFile("test.txt");
-		  loadMap(Integer.parseInt(s), db);
+		  loadMap(25, db);
 		  
 		  cp = getContentPane();
 	      cp.setLayout(new GridLayout(ROWS, COLS));
@@ -422,12 +474,12 @@ public class Form extends JFrame {
 	      setVisible(true);  
 	      
 	      
-	      for(int i=0;i<ROWS;i++) {
+	      /*for(int i=0;i<ROWS;i++) {
 	    	  for(int j=0;j<COLS;j++) {
 	    		  System.out.print(views[i][j].getID()+" ");
 	    	  }
 	    	  System.out.println("\n");
-	      }
+	      }*/
 	      
 	      Rail rtemp1=new Rail(-20);
 	      fields.add(rtemp1);
@@ -443,17 +495,19 @@ public class Form extends JFrame {
 	      addElement(1,1);
 	      addElement(1,2);
 	      addElement(1,3);
-	      setTColor(1, 255,0,0,true);
-	      setTColor(2, 10,130,90,true);
-	      setTColor(3, 145,130,90,true);
+	      addElement(1,4);
+	      //setTColor(1, 0,0,0,true);
+	      setTColor(2, 128,0,128,true);
+	      setTColor(3, 255,0,0,true);
+	      setTColor(4, 255,0,255,true);
 	      rePaint();
 	     
 	      timer=new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				step();
-				listTrain();
-				System.out.println(trains.get(0).t.get(0).r.id);
+				//listTrain();
+				//System.out.println(trains.get(0).t.get(0).r.id);
 				rePaint();
 			}
 	    	  
@@ -465,7 +519,7 @@ public class Form extends JFrame {
 	
 	   
 	static int ind; //az aktuálisan kiírni kívánt szöveg behúzásának mértékét adja meg
-	static boolean log=true;
+	static boolean log=false;
 	/**
 	 * megadott stringeket ír ki, az éppen aktuális mértékû behúzással együtt
 	 * @param s üzenet
@@ -884,7 +938,7 @@ public class Form extends JFrame {
 				b=true;
 			}
 		}
-		if(b==true) win();
+		if(b==true) Form.win();
 	}
 	
 	/**
@@ -915,21 +969,24 @@ public class Form extends JFrame {
 	/**
 	 * Gyõzelem
 	 * @return nothing*/
-	public void win() {	//gyõzelem jelzõ
-		ind++;
-		System.out.println("Nyertél :3");
-		logging("Skeleton: win()");
-		ind--;
+	public static void win() {	//gyõzelem jelzõ
+		//ind++;
+		//System.out.println("Nyertél :3l");
+		//logging("Skeleton: win()");
+		//ind--;
+		JOptionPane.showMessageDialog(null, "Nyertél!");
 		System.exit(0);
 	}
 	/**
 	 * Vesztettél
 	 * @return nothing*/
 	static public void gameover() {	//vereség jelzõ
-		ind++;
-		System.out.println("Vesztettél :P");
-		logging("Skeleton: gameover()");
-		ind--;
+		//ind++;
+		//System.out.println("Vesztettél :Pl");
+		//logging("Skeleton: gameover()");
+		//ind--;
+		//System.exit(0);
+		JOptionPane.showMessageDialog(null, "Vesztettél!");
 		System.exit(0);
 	}
 	
@@ -945,7 +1002,7 @@ public class Form extends JFrame {
 							
 							cp.getComponent(k*11+l).setBackground(trains.get(i).t.get(j).cNow);
 							int id=trains.get(i).t.get(j).rPrev.id;
-							System.out.println("Prev "+id);
+							//System.out.println("Prev "+id);
 							for(int m=0;m<ROWS;m++) {
 								for(int n=0;n<COLS;n++) {
 									if(views[m][n].getID()==id) {
@@ -957,7 +1014,7 @@ public class Form extends JFrame {
 						}
 						else if(trains.get(i).t.get(j).r.id==-1){
 							int id=trains.get(i).t.get(j).rPrev.id;
-							System.out.println("Prev "+id);
+							//System.out.println("Prev "+id);
 							for(int m=0;m<ROWS;m++) {
 								for(int n=0;n<COLS;n++) {
 									if(views[m][n].getID()==id) {

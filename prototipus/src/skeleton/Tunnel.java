@@ -33,10 +33,10 @@ public class Tunnel extends Rail {
 			}
 		}
 		
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: konstruktor");
+		Form.ind++;
+		Form.logging("Tunnel: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/** 
@@ -48,10 +48,10 @@ public class Tunnel extends Rail {
 	 */
 	public Tunnel(Rail r1, Rail r2, int id){	
 		super(r1,r2, id);
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: konstruktor");
+		Form.ind++;
+		Form.logging("Tunnel: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/** 
@@ -62,10 +62,10 @@ public class Tunnel extends Rail {
 	 */
 	public Tunnel(Rail r1, int id){	
 		super(r1, id);
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: konstruktor");
+		Form.ind++;
+		Form.logging("Tunnel: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/** 
@@ -76,10 +76,10 @@ public class Tunnel extends Rail {
 	public Tunnel(int id) {
 		super(id);
 		
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: konstruktor");
+		Form.ind++;
+		Form.logging("Tunnel: konstruktor");
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/** 
@@ -88,8 +88,8 @@ public class Tunnel extends Rail {
 	 * @return nothing
 	 */
 	public void setR3(Rail r3){	
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: setR3()");
+		Form.ind++;
+		Form.logging("Tunnel: setR3()");
 		
 		this.r3=r3;
 		if (r3.getR1()==null){
@@ -97,7 +97,7 @@ public class Tunnel extends Rail {
 		}else{
 			r3.setNext(this);
 		}
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/** 
@@ -106,8 +106,8 @@ public class Tunnel extends Rail {
 	 * @return nothing
 	 */
 	public void buildTunnel(Tunnel t) {	//alagút építése a megadott végpontig
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: buildTunnel()");
+		Form.ind++;
+		Form.logging("Tunnel: buildTunnel()");
 		
 		r3=new Rail(null, null, -1);
 		r3.setNext(this);
@@ -125,7 +125,7 @@ public class Tunnel extends Rail {
 		//r3.r1=t;
 		//r3.r2=this;
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -134,24 +134,24 @@ public class Tunnel extends Rail {
 	 * @return nothing
 	 */
 	public void setNum(int n) { 
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: setNum()");
+		Form.ind++;
+		Form.logging("Tunnel: setNum()");
 		
 		num=n;
 		
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
 	 * Alagút felépítettségének állítása
 	 * @return nothing*/
 	public void setBuilt(){	
-		Skeleton.ind++;
-		Skeleton.logging("Tunnel: setBuilt()");
+		Form.ind++;
+		Form.logging("Tunnel: setBuilt()");
 		System.out.println(built);
 		built=!built;
 		System.out.println(built);
-		Skeleton.ind--;
+		Form.ind--;
 	}
 	
 	/**
@@ -162,8 +162,8 @@ public class Tunnel extends Rail {
 	 */
 	@Override
 	public boolean pass(Rail r, TrainElement te) throws IOException{ 
-		 Skeleton.ind++;
-		 Skeleton.logging("Tunnel: pass()");
+		 Form.ind++;
+		 Form.logging("Tunnel: pass()");
 			
 		 if (built==false && r==r2 && r1.getOccupied()==false){		//ha nincs megépítve alagút és léphet a normál kimenetre
 			te.setRail(r1);
@@ -171,7 +171,7 @@ public class Tunnel extends Rail {
 		 	this.r1.setOccupied(true);
 			this.setOccupied(false);
 			
-			Skeleton.ind--;
+			Form.ind--;
 			return true;
 			
 		 }else if(built==false && r==r1 && r2.getOccupied()==false){
@@ -180,7 +180,7 @@ public class Tunnel extends Rail {
 			this.r2.setOccupied(true);
 			this.setOccupied(false);
 				
-			Skeleton.ind--;
+			Form.ind--;
 			 
 			return true; 
 		 }
@@ -193,7 +193,7 @@ public class Tunnel extends Rail {
 					 this.r3.setOccupied(true);
 				   	 this.setOccupied(false);
 					
-				   	 Skeleton.ind--;
+				   	 Form.ind--;
 					 return true;
 				 }else{
 					 return false;
@@ -205,14 +205,14 @@ public class Tunnel extends Rail {
 				 this.r2.setOccupied(true);
 			   	 this.setOccupied(false);
 				
-			   	 Skeleton.ind--;
+			   	 Form.ind--;
 				 return true;
 			 } else {
 				 return false;
 			 }
 			 
 		 }else  {				//ha nem tudott lépni a vonat
-			 Skeleton.ind--;
+			 Form.ind--;
 			 return false;
 		 }
 	 }
